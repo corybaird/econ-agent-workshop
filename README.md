@@ -46,7 +46,7 @@ Start here, in order:
   -   Default prompts (leveraging tools from section 1)
   -   Skills (leveraging tools from section 2)
 - **Custom harness:** Pydantic harness optimized for economic workflows
-- **[Dorch](https://github.com/corybaird/dorch):** My custom software tool for coding agents in a Docker container
+- **[Dorch](https://github.com/corybaird/dorch):** My custom software tool for coding agents in a Docker container *(link coming)*
   - [Herdr](https://github.com/herdrdev/herdr) agent orchestration/delgation (works across Claude Code, Pi, and Antigravity)
   - Agents only see the project folder you start them in, not the rest of your computer
 
