@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "econ-agent-harness"
+version = "0.6.0"
+description = "Reproducible economic research workflows for sandboxed AI agents"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "pydantic-ai-harness[coder]>=0.68.0",
+]
+
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.hatch.build.targets.wheel]
+force-include = { "src/econ_agent_harness" = "econ_agent_harness", "src/economic_libraries" = "economic_libraries" }
