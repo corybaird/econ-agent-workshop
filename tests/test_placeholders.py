@@ -14,10 +14,6 @@ STUB_MODULES = (
     econ_agent_harness.setup,
     econ_agent_harness.pipeline,
     econ_agent_harness.verify,
-    economic_libraries.econ_pdf_extract.example1,
-    economic_libraries.econ_pdf_extract.example2,
-    economic_libraries.reproducible_econ.example1,
-    economic_libraries.reproducible_econ.example2,
 )
 
 
@@ -34,6 +30,10 @@ def test_run_stubs_raise():
 IMPLEMENTED_MODULES = (
     economic_libraries.auto_econ_sentiment.example1,
     economic_libraries.auto_econ_sentiment.example2,
+    economic_libraries.econ_pdf_extract.example1,
+    economic_libraries.econ_pdf_extract.example2,
+    economic_libraries.reproducible_econ.example1,
+    economic_libraries.reproducible_econ.example2,
     economic_libraries.stats_transformer.example1,
     economic_libraries.stats_transformer.example2,
 )
