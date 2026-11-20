@@ -1,0 +1,29 @@
+- paper: example_paper
+  page: 1
+  section: 1 Introduction
+  type: magnitude
+  quote: We find that monetary policy surprises reduce industrial production by 3.2
+    percent on impact.
+- paper: example_paper
+  page: 1
+  section: 1 Introduction
+  type: significance
+  quote: The estimate on the policy surprise is -0.42 and is significant at the one
+    percent level (p < 0.01).
+- paper: example_paper
+  page: 1
+  section: 1 Introduction
+  type: robustness
+  quote: Our results show that this estimate is robust to alternative identification
+    schemes and sample windows.
+- paper: example_paper
+  page: 2
+  section: 2 Results and Diagnostics
+  type: magnitude
+  quote: The regression R-squared is 0.21, the t-statistic is 3.45, and N = 214 observations.
+- paper: example_paper
+  page: 2
+  section: 2 Results and Diagnostics
+  type: magnitude
+  quote: The 95% CI is [-1.8, -0.9] percent wide, and the placebo regression yields
+    an R-squared of 0.02.
