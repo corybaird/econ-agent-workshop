@@ -1,0 +1,11 @@
+# Lexical (dictionary-based) sentiment scoring.
+# Consumed by src/economic_libraries/auto_econ_sentiment/example1.py and example2.py.
+# Dictionaries ship inside auto-econ-sentiment (hubert, lm, hiv, bn, ap, correa).
+lexical:
+  dictionary: hubert
+  aggregation: posneg
+
+input:
+  file_path: data/raw/sentiment_sample.csv
+  text_column: text
+  date_column: date

@@ -9,6 +9,7 @@ data/cache/
 local/
 data/raw/*
 !data/raw/.gitkeep
+!data/raw/sentiment_sample.csv
 data/intermediate/*
 !data/intermediate/.gitkeep
 data/final/*
