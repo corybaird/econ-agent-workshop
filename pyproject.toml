@@ -12,7 +12,14 @@ dependencies = [
   "pydantic-ai-harness[coder]>=0.68.0",
   "stats-transformer>=1.11.1",
   "auto-econ-sentiment>=1.0.2",
+  "econ-pdf-extract",
+  "reproducible-econ",
 ]
+
+[tool.uv.sources]
+# Local sources until published to PyPI: delete these two lines then
+econ-pdf-extract = { path = "../econ-pdf-extract", editable = true }
+reproducible-econ = { path = "../reproducible-econ", editable = true }
 
 
 [dependency-groups]
