@@ -1,4 +1,13 @@
-"""Example 1: dictionary scoring on a few bundled sentences."""
+"""Example 1: dictionary scoring on a few bundled sentences.
+
+The chosen dictionary, "hubert", is the Hubert-Labondance (2021) central-bank
+tone dictionary: "positive" entries are growth-acceleration words (increase,
+accelerate, strong, gain, expand) and "negative" entries are contraction words
+(decrease, decelerate, weak, loss, contract). The score is therefore a
+growth-tone index on [0, 2] around a 1.0 midpoint, not ordinary positivity.
+Sentences below are one clearly growth-positive, one clearly growth-negative,
+and one neutral (no dictionary words) under that dictionary.
+"""
 
 import logging
 from datetime import datetime
@@ -12,10 +21,9 @@ from economic_libraries.paths import PROJECT_ROOT
 logger = logging.getLogger(__name__)
 
 SENTENCES = [
-    "Faster growth is expected and investment is accelerating.",
-    "Inflation is increasing and downside risks are getting stronger.",
-    "The labor market remains strong while output is stable.",
-    "Demand is weaker and firms expect lower profits.",
+    "Output is expanding faster and firms report strong gains in demand.",
+    "Investment contracted and the labor market is growing weaker.",
+    "Budget planning continues under the framework approved last week.",
 ]
 
 
@@ -24,12 +32,16 @@ def run():
     with open(PROJECT_ROOT / "references/configs/auto_econ_sentiment_lexical.yaml") as f:
         config = yaml.safe_load(f)
     lexical_cfg = config["lexical"]
+    dictionary, agg = lexical_cfg["dictionary"], lexical_cfg["aggregation"]
+    score_col = f"{dictionary}_sentiment_{agg}"
 
-    df = pd.DataFrame({config["input"]["text_column"]: SENTENCES})
-    scorer = SentimentLexical(df_input=df, text_column=config["input"]["text_column"])
-    score_col = f"{lexical_cfg['dictionary']}_sentiment_{lexical_cfg['aggregation']}"
-    scored = scorer.sentiment_pipeline(dictionary_name=lexical_cfg["dictionary"], method=lexical_cfg["aggregation"])
-    logger.info("\n%s", scored[["text", score_col, f"{lexical_cfg['dictionary']}_words_positive_{lexical_cfg['aggregation']}"]].to_string(index=False))
+    df = pd.DataFrame({"text": SENTENCES})
+    scorer = SentimentLexical(df_input=df, text_column="text")
+    scored = scorer.sentiment_pipeline(dictionary_name=dictionary, method=agg)
+    logger.info(
+        "\n%s",
+        scored[["text", score_col, f"{dictionary}_words_positive_{agg}", f"{dictionary}_words_negative_{agg}"]].to_string(index=False),
+    )
 
     out_path = PROJECT_ROOT / f"data/final/sentiment_sentences_{datetime.now():%Y%m%d_%H%M%S}.csv"
     scored.to_csv(out_path, index=False)

@@ -1,4 +1,10 @@
-"""Example 2: score a small dated text-corpus file and aggregate to a yearly sentiment index."""
+"""Example 2: score a small dated text-corpus file and aggregate to a yearly index.
+
+Uses the "hubert" (Hubert-Labondance 2021) dictionary, whose "positive" words
+are growth-acceleration terms and "negative" words are contraction terms, so
+the yearly average is a growth-tone index on [0, 2] (1.0 = no directional
+words), not an ordinary positive/negative sentiment score.
+"""
 
 import logging
 from datetime import datetime
@@ -26,7 +32,7 @@ def run():
     scored = scorer.sentiment_pipeline(dictionary_name=lexical_cfg["dictionary"], method=lexical_cfg["aggregation"])
 
     ts = scored.groupby(scored[input_cfg["date_column"]].dt.year)[score_col].mean().reset_index()
-    ts.columns = ["year", "mean_sentiment"]
+    ts.columns = ["year", "mean_growth_tone"]
     logger.info("\n%s", ts.to_string(index=False))
 
     out_path = PROJECT_ROOT / f"data/final/sentiment_timeseries_{datetime.now():%Y%m%d_%H%M%S}.csv"
