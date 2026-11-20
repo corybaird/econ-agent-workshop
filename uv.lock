@@ -200,9 +200,9 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "auto-econ-sentiment" },
+    { name = "auto-econ-sentiment", specifier = ">=1.0.2" },
     { name = "pydantic-ai-harness", extras = ["coder"], specifier = ">=0.68.0" },
-    { name = "stats-transformer" },
+    { name = "stats-transformer", specifier = ">=1.11.1" },
 ]
 
 [package.metadata.requires-dev]

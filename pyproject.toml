@@ -10,8 +10,8 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
   "pydantic-ai-harness[coder]>=0.68.0",
-  "stats-transformer",
-  "auto-econ-sentiment",
+  "stats-transformer>=1.11.1",
+  "auto-econ-sentiment>=1.0.2",
 ]
 
 
@@ -23,4 +23,4 @@ testpaths = ["tests"]
 pythonpath = ["src"]
 
 [tool.hatch.build.targets.wheel]
-force-include = { "src/econ_agent_harness" = "econ_agent_harness", "src/economic_libraries" = "economic_libraries" }
+packages = ["src/econ_agent_harness", "src/economic_libraries"]
