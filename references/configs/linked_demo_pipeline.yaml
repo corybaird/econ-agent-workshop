@@ -1,0 +1,86 @@
+# Linked demo: Nakamura and Steinsson (2018) NBER WP 19260 extract-then-verify
+# pipeline. Stages adapted from econ-pdf-extract + reproducible-econ reference
+# project; the claims.entries injected at runtime by
+# src/economic_libraries/linked_demo/demo.py come from the human-confirmed map
+# in references/configs/linked_demo_claim_map.yaml. cache_dir and reports_dir
+# are anchored to the repo root by reproducible-econ's config loader.
+includes: []
+
+project:
+  name: linked_demo_nakamura_steinsson_2018
+  seed: 42
+
+data:
+  nominal_yields_path: ${project_root}/data/raw/nakamura_steinsson_2018/NominalYields.parquet.gzip
+  real_yields_path: ${project_root}/data/raw/nakamura_steinsson_2018/RealYields.parquet.gzip
+  fomc_meetings_path: ${project_root}/data/raw/nakamura_steinsson_2018/FOMCmeetings.parquet.gzip
+  shocks_path: ${project_root}/data/raw/nakamura_steinsson_2018/ABJ-2024-monetary-policy-surprises_Data.parquet.gzip
+  start_date: "2000-01-01"
+  end_date: "2014-03-31"
+  scheduled_only: true
+  exclude_crisis_start: "2008-07-01"
+  exclude_crisis_end: "2009-06-30"
+  maturities: ["02", "03", "05", "10"]
+
+estimation:
+  shock_column: ns
+  cov_type: HC1
+  specs:
+    - name: nominal_2y
+      dependent: d_sveny02
+    - name: real_2y
+      dependent: d_tipsy02
+    - name: breakeven_2y
+      dependent: d_breakeven02
+    - name: nominal_3y
+      dependent: d_sveny03
+    - name: nominal_5y
+      dependent: d_sveny05
+    - name: real_5y
+      dependent: d_tipsy05
+    - name: breakeven_5y
+      dependent: d_breakeven05
+    - name: nominal_10y
+      dependent: d_sveny10
+    - name: real_10y
+      dependent: d_tipsy10
+    - name: breakeven_10y
+      dependent: d_breakeven10
+
+output:
+  cache_dir: data/cache/linked_demo
+  reports_dir: data/final/linked_demo/${run_timestamp}
+  claims_path: ${output.reports_dir}/claims_report.json
+
+# Entries are injected at runtime from linked_demo_claim_map.yaml (human mapping
+# of extracted paper claims to specs); running this config directly without the
+# demo injects nothing.
+claims:
+  fail_on_error: false
+  entries: []
+
+default_module: economic_libraries.linked_demo.ns_stages
+
+stages:
+  - name: prepare_event_data
+    class: PrepareEventDataStage
+    phase: data
+    produces: [event_panel]
+    cache: true
+    cache_inputs: [data, project]
+
+  - name: estimate_yield_responses
+    class: EstimateYieldResponseStage
+    phase: estimate
+    requires: [event_panel]
+    produces: [estimates]
+    cache: true
+    cache_inputs: [estimation]
+
+  - name: check_claims
+    module: reproducible_econ.emitters.claims
+    class: ClaimCheckStage
+    phase: report
+    requires: [estimates]
+    produces: [claims_results]
+    cache: false
