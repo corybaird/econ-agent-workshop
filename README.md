@@ -24,7 +24,7 @@ Start here, in order:
 - [Notebooks](notebooks/README.md) — One runnable notebook per library
 - [Citations](docs/citations.md) — Full citations for every paper, dataset, and dictionary the examples use
 
-> In progress: data and more code to be uploaded before the presentation.
+> In progress: more code to be uploaded before the presentation. Data sources and terms are in [data/LICENSES.md](data/LICENSES.md).
 
 ## 1. Folders/docs as INFRASTRUCTURE
 
@@ -60,7 +60,7 @@ src/
 ├── econ_agent_harness/     # setup, pipeline, verify, agent
 └── economic_libraries/     # one folder per tool, two examples each
 data/
-├── raw/                    # immutable inputs (placeholder)
+├── raw/                    # immutable inputs, terms in data/LICENSES.md
 ├── intermediate/           # regenerable by code (placeholder)
 └── final/                  # analysis-ready outputs (placeholder)
 references/
