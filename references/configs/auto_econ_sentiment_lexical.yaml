@@ -1,0 +1,15 @@
+# Lexical scoring with the "hubert" dictionary (Hubert & Labondance 2021),
+# which measures central-bank growth tone: "positive" entries are
+# growth-acceleration words (increase, accelerate, strong, expand), "negative"
+# entries are contraction words (decrease, decelerate, weak, contract). Scores
+# live on [0, 2] with 1.0 = no directional words; higher = growth/hawkish tone.
+# Alternatives shipped in the package: lm (Loughran-McDonald tone), hiv, correa.
+# Consumed by src/economic_libraries/auto_econ_sentiment/example1.py and example2.py.
+lexical:
+  dictionary: hubert
+  aggregation: posneg
+
+input:
+  file_path: data/raw/sentiment_sample.csv
+  text_column: text
+  date_column: date
