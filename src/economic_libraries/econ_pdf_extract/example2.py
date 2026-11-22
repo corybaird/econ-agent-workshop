@@ -1,4 +1,4 @@
-"""Example 2: offline claim evaluation against hand-labelled reference claims.
+"""Example 2: offline claim evaluation against verbatim reference claims.
 
 The reference YAML in references/configs/econ_pdf_extract_example_refs/ quotes
 the synthetic example paper verbatim. ClaimEvaluator re-runs the extraction

@@ -1,4 +1,4 @@
-# Public inputs the notebooks download on demand into gitignored data/raw/ and hash-check.
+# Public inputs the notebooks use, hash-checked and downloaded if missing. The FOMC file is committed, the PDF is not.
 fomc_statements:
   url: https://raw.githubusercontent.com/corybaird/auto-econ-sentiment/2b93624008907478bc6382099daa523d30e52acd/data/raw/basic_tests/monetary_policy_statement.parquet.gzip
   sha256: d146c21598b0568f5f8a1dab072ecfdbf72a1f76a9c562dedac1c39f74428971

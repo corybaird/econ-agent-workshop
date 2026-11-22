@@ -1,8 +1,8 @@
-# Human-confirmed mapping: extracted claim (econ-pdf-extract draft) -> spec
+# AI-drafted mapping: extracted claim (econ-pdf-extract draft) -> spec
 # (references/configs/linked_demo_pipeline.yaml) + published value + tolerance.
 #
-# Each entry was confirmed by hand against the PDF text of NBER Working Paper
-# 19260 (verified quote spans below). Only claims whose number is literally
+# Drafted by an AI worker and not yet confirmed by a person. The demo checks that
+# each quote span below appears in the claim extracted from NBER Working Paper 19260. Only claims whose number is literally
 # present in a draft quote are mapped; numbers the replication does not
 # estimate (instantaneous forward rates, stock prices, model parameters) stay
 # unmapped. Coef is the published value in basis points (PDF) expressed in

@@ -97,11 +97,11 @@ What the example actually loads:
 ### Nakamura and Steinsson replication inputs — `data/raw/nakamura_steinsson_2018/`
 
 Four standardized parquet files under `data/raw/nakamura_steinsson_2018/`
-(symlinks, not committed):
+(committed, terms in [data/LICENSES.md](../data/LICENSES.md)):
 
 - `NominalYields.parquet.gzip`, `RealYields.parquet.gzip` — daily nominal and
   TIPS yields (sveny/tipsy series, Gürkaynak, Sack, and Wright 2007 curve data)
-- `FOMCmeetings.parquet.gzip` — FOMC meeting calendar, 2000–2014
+- `FOMCmeetings.parquet.gzip` — FOMC meeting calendar, 1982–2014
 - `ABJ-2024-monetary-policy-surprises_Data.parquet.gzip` — high-frequency
   policy surprises from Acosta, Brennan, and Jacobson (2024), above; its `ns`
   series is the policy news shock of Nakamura and Steinsson (2018)
@@ -110,7 +110,8 @@ Four standardized parquet files under `data/raw/nakamura_steinsson_2018/`
 
 - FOMC statements: `monetary_policy_statement.parquet.gzip` from the
   [auto-econ-sentiment](https://github.com/corybaird/auto-econ-sentiment)
-  repository, downloaded at a pinned commit.
+  repository at a pinned commit, committed under `data/raw/notebooks/`. Text from
+  the Board of Governors of the Federal Reserve System.
 - Longley: J. W. Longley (1967). "An Appraisal of Least Squares Programs for the
   Electronic Computer from the Point of View of the User." *Journal of the
   American Statistical Association*, 62(319), 819–841. Loaded as

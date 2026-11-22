@@ -1,7 +1,8 @@
 # Linked extract-then-verify demo configuration.
 # Consumed by src/economic_libraries/linked_demo/demo.py.
 #
-# Honesty contract: extraction proposes, a human maps (linked_demo_claim_map.yaml),
+# Honesty contract: extraction proposes, linked_demo_claim_map.yaml maps (AI-drafted,
+# to be confirmed by a person),
 # the pipeline verifies. The extractor never decides what a number means.
 paper:
   id: nakamura_steinsson_2018_wp
