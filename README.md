@@ -21,6 +21,7 @@ Start here, in order:
 - [0. Research Basics](docs/workshop/0_research_basics.md): Recommended software for workshop: uv, Git, Docker, Overleaf
 - [1. Macro Libraries Toolbox](docs/workshop/1_macro_libraries_toolbox.md) — Four libraries/tools for economists
 - [2. Agent Orchestration](docs/workshop/2_agent_orchestration.md) — From basics agents, to agent orchestration to domain specific harnesses
+- [Notebooks](notebooks/README.md) — One runnable notebook per library
 - [Citations](docs/citations.md) — Full citations for every paper, dataset, and dictionary the examples use
 
 > In progress: data and more code to be uploaded before the presentation.
