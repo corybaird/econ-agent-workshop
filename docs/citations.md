@@ -47,6 +47,21 @@ examples in this repo, mirroring the inputs declared in
   Bank Tone." *European Economic Review*, 142, 103684.
   doi:[10.1016/j.euroecorev.2021.103684](https://doi.org/10.1016/j.euroecorev.2021.103684)
 
+### Other dictionaries in the notebook — "hiv", "ap", "bn" (citations as listed in the auto-econ-sentiment README)
+
+- "hiv": P. J. Stone, D. C. Dunphy, and M. S. Smith (1966). *The General
+  Inquirer: A Computer Approach to Content Analysis*.
+- "ap": M. Apel and M. Blix Grimaldi (2014). "How Informative Are Central Bank
+  Minutes?" *Review of Economics*, 65(1), 53–76.
+- "bn": H. Bennani and M. Neuenkirch (2017). "The (Home) Bias of European
+  Central Bankers." *Applied Economics*, 49(11), 1114–1131.
+
+### Shapiro, Sudhof, and Wilson (2020) — PDF in the econ-pdf-extract notebook
+
+- Adam Hale Shapiro, Moritz Sudhof, and Daniel Wilson (2020). "Measuring News
+  Sentiment." Federal Reserve Bank of San Francisco Working Paper 2017-01.
+  doi:[10.24148/wp2017-01](https://doi.org/10.24148/wp2017-01)
+
 ### Acosta, Brennan, and Jacobson (2024) — monetary policy surprises
 
 - Miguel Acosta, Connor M. Brennan, and Margaret M. Jacobson (2024).
@@ -90,6 +105,21 @@ Four standardized parquet files under `data/raw/nakamura_steinsson_2018/`
 - `ABJ-2024-monetary-policy-surprises_Data.parquet.gzip` — high-frequency
   policy surprises from Acosta, Brennan, and Jacobson (2024), above; its `ns`
   series is the policy news shock of Nakamura and Steinsson (2018)
+
+### Notebook datasets — `notebooks/`
+
+- FOMC statements: `monetary_policy_statement.parquet.gzip` from the
+  [auto-econ-sentiment](https://github.com/corybaird/auto-econ-sentiment)
+  repository, downloaded at a pinned commit.
+- Longley: J. W. Longley (1967). "An Appraisal of Least Squares Programs for the
+  Electronic Computer from the Point of View of the User." *Journal of the
+  American Statistical Association*, 62(319), 819–841. Loaded as
+  `statsmodels.datasets.longley`.
+- Stackloss: K. A. Brownlee (1965). *Statistical Theory and Methodology in
+  Science and Engineering*, 2nd edition, Wiley. Loaded as
+  `statsmodels.datasets.stackloss`.
+- Statecrime: 2009 state data, mostly from the American Statistical Abstracts,
+  as described in `statsmodels.datasets.statecrime`.
 
 ### Synthetic/bundled workshop inputs
 
