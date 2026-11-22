@@ -1,0 +1,20 @@
+# Linked extract-then-verify demo configuration.
+# Consumed by src/economic_libraries/linked_demo/demo.py.
+#
+# Honesty contract: extraction proposes, a human maps (linked_demo_claim_map.yaml),
+# the pipeline verifies. The extractor never decides what a number means.
+paper:
+  id: nakamura_steinsson_2018_wp
+  authors: "Emi Nakamura and Jon Steinsson"
+  title: "High Frequency Identification of Monetary Non-Neutrality: The Information Effect"
+  journal: "NBER Working Paper 19260"
+  url: https://www.nber.org/system/files/working_papers/w19260/w19260.pdf
+  pdf_path: data/raw/nakamura_steinsson_w19260.pdf
+  # SHA-256 of the PDF the demo verified on first run; a mismatch blocks the run
+  # instead of silently verifying claims against a different paper draft.
+  sha256: ef562fa6f42a5a21fd68d0be09d9e5e1beb62393c1b5e16829edc13feb1068a7
+
+claim_map_path: references/configs/linked_demo_claim_map.yaml
+pipeline_config_path: references/configs/linked_demo_pipeline.yaml
+drafts_dir: data/intermediate/linked_demo
+claims_stage: check_claims
