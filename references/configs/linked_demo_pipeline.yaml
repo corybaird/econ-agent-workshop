@@ -1,7 +1,7 @@
 # Linked demo: Nakamura and Steinsson (2018) NBER WP 19260 extract-then-verify
 # pipeline. Stages adapted from econ-pdf-extract + reproducible-econ reference
 # project; the claims.entries injected at runtime by
-# src/economic_libraries/linked_demo/demo.py come from the human-confirmed map
+# src/economic_libraries/linked_demo/demo.py come from the AI-drafted map
 # in references/configs/linked_demo_claim_map.yaml. cache_dir and reports_dir
 # are anchored to the repo root by reproducible-econ's config loader.
 includes: []
@@ -52,7 +52,7 @@ output:
   reports_dir: data/final/linked_demo/${run_timestamp}
   claims_path: ${output.reports_dir}/claims_report.json
 
-# Entries are injected at runtime from linked_demo_claim_map.yaml (human mapping
+# Entries are injected at runtime from linked_demo_claim_map.yaml (mapping
 # of extracted paper claims to specs); running this config directly without the
 # demo injects nothing.
 claims:
