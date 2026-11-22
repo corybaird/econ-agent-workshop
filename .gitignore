@@ -11,6 +11,10 @@ data/raw/*
 !data/raw/.gitkeep
 !data/raw/sentiment_sample.csv
 !data/raw/example_paper.pdf
+!data/raw/nakamura_steinsson_2018/
+!data/raw/notebooks/
+data/raw/notebooks/*
+!data/raw/notebooks/monetary_policy_statement.parquet.gzip
 data/intermediate/*
 !data/intermediate/.gitkeep
 data/final/*
