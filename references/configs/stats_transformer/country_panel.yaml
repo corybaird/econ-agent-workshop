@@ -1,0 +1,19 @@
+# Inflation persistence in the G7, fixed-effects panel OLS.
+# Consumed by src/economic_libraries/stats_transformer/country_panel.py
+# Countries are ISO2 codes or aliases (UK), converted to the dataset's ISO3 codes
+# with references/dictionaries/dict_country_converter.py.
+data:
+  example_dataset: macrodb_gdp_inflation
+  countries: [US, UK, DE, FR, IT, JP, CA]
+  start_year: 1971
+  end_year: 2019
+  entity_column: country
+  date_column: date
+
+model:
+  model_type: panel_ols
+  target_variable: inflation
+  independent_variables: [lag_inflation]
+  panel_ols:
+    entity_effects: true
+    time_effects: false
