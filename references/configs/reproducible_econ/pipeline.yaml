@@ -1,6 +1,6 @@
 # Full synthetic Phillips-curve pipeline (tables, figure, macros, claim checks).
 # Copied from reproducible-econ references/configs/example_pipeline.yaml, output paths moved to gitignored data/.
-# Consumed by notebooks/4_reproducible_econ.ipynb and by example1.py and example2.py
+# Consumed by notebooks/4_reproducible_econ.ipynb and by run_pipeline.py and cached_rerun.py
 # in src/economic_libraries/reproducible_econ/.
 includes: []
 

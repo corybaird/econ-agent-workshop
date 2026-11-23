@@ -4,11 +4,18 @@
 # entries are contraction words (decrease, decelerate, weak, contract). Scores
 # live on [0, 2] with 1.0 = no directional words; higher = growth/hawkish tone.
 # Alternatives shipped in the package: lm (Loughran-McDonald tone), hiv, correa.
-# Consumed by src/economic_libraries/auto_econ_sentiment/example1.py and example2.py.
+# Consumed by src/economic_libraries/auto_econ_sentiment/score_sentences.py and tone_index.py.
 lexical:
   dictionary: hubert
   aggregation: posneg
 
+# Scored by score_sentences.py: growth-positive, growth-negative and neutral.
+sentences:
+  - Output is expanding faster and firms report strong gains in demand.
+  - Investment contracted and the labor market is growing weaker.
+  - Budget planning continues under the framework approved last week.
+
+# Scored by tone_index.py.
 input:
   file_path: data/raw/sentiment_sample.csv
   text_column: text

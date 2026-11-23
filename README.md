@@ -58,7 +58,7 @@ Start here, in order:
 ```text
 src/
 ├── econ_agent_harness/     # setup, pipeline, verify, agent
-└── economic_libraries/     # one folder per tool, two examples each
+└── economic_libraries/     # one folder per tool, plus verify_paper_claims
 data/
 ├── raw/                    # immutable inputs, terms in data/LICENSES.md
 ├── intermediate/           # regenerable by code (placeholder)

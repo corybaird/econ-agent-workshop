@@ -1,5 +1,5 @@
 # Fixed-effects panel OLS on the Grunfeld (1958) corporate investment panel.
-# Consumed by src/economic_libraries/stats_transformer/example1.py
+# Consumed by src/economic_libraries/stats_transformer/panel_ols.py
 # The panel ships inside stats-transformer; see stats_transformer.data.load_example.
 data:
   example_dataset: grunfeld
