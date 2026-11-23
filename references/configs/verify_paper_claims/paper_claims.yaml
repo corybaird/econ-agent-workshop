@@ -1,5 +1,5 @@
 # Paper to download, and the claims to verify against re-estimated regressions.
-# Consumed by src/economic_libraries/verify_paper_claims/demo.py.
+# Consumed by src/economic_libraries/verify_paper_claims/run.py.
 #
 # Honesty contract: extraction proposes, the claims below map (AI-drafted, to be
 # confirmed by a person), the pipeline verifies. The extractor never decides what a number means.

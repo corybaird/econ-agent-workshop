@@ -1,7 +1,7 @@
 # Verify paper claims: Nakamura and Steinsson (2018) NBER WP 19260 extract-then-verify
 # pipeline. Stages adapted from econ-pdf-extract + reproducible-econ reference
 # project; the claims.entries injected at runtime by
-# src/economic_libraries/verify_paper_claims/demo.py come from the AI-drafted map
+# src/economic_libraries/verify_paper_claims/run.py come from the AI-drafted map
 # in references/configs/verify_paper_claims/paper_claims.yaml. cache_dir and reports_dir
 # are anchored to the repo root by reproducible-econ's config loader.
 includes: []
@@ -59,7 +59,7 @@ claims:
   fail_on_error: false
   entries: []
 
-default_module: economic_libraries.verify_paper_claims.ns_stages
+default_module: economic_libraries.verify_paper_claims.event_study_stages
 
 stages:
   - name: prepare_event_data
