@@ -52,10 +52,10 @@ RUN pi install npm:@langfuse/pi-observability-plugin
 # Bake Section 1+2 combined prompt, attribution rules, Herdr roles, and entrypoint
 USER root
 COPY .agents/prompts/2_combined_econ_prompt.md /etc/econ-agent/PROMPT.md
-COPY .agents/dorch/claude-settings.json /etc/claude-code/managed-settings.json
+COPY .agents/dorcheco/claude-settings.json /etc/claude-code/managed-settings.json
 COPY .agents/prompts/2_combined_econ_prompt.md /etc/claude-code/CLAUDE.md
-COPY .agents/dorch/roles/ /etc/herdr/roles/
-COPY .agents/dorch/entrypoint.sh /usr/local/bin/dorcheco-entrypoint.sh
+COPY .agents/dorcheco/roles/ /etc/herdr/roles/
+COPY .agents/dorcheco/entrypoint.sh /usr/local/bin/dorcheco-entrypoint.sh
 RUN chmod 0644 /etc/econ-agent/PROMPT.md /etc/claude-code/managed-settings.json \
     /etc/claude-code/CLAUDE.md /etc/herdr/roles/*.md && \
     chmod 0755 /usr/local/bin/dorcheco-entrypoint.sh

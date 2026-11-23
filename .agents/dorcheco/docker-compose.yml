@@ -1,12 +1,12 @@
 services:
-  dorch:
+  dorcheco:
     build:
       context: ../..
-      dockerfile: .agents/dorch/Dockerfile
+      dockerfile: .agents/dorcheco/Dockerfile
       args:
         HOST_UID: "${HOST_UID:-1000}"
         HOST_GID: "${HOST_GID:-1000}"
-    image: econ-workshop-dorch:latest
+    image: dorcheco:latest
     stdin_open: true
     tty: true
     env_file:
@@ -20,20 +20,20 @@ services:
       # OS-enforced read-only wall on raw research data
       - ../../data/raw:/workspace/data/raw:ro
       # Dedicated Docker volume for isolated git worktrees (one per parallel worker)
-      - dorch_worktrees:/workspace-worktrees
+      - dorcheco_worktrees:/workspace-worktrees
       # Persistent credentials and caches across container runs
-      - dorch_gh:/home/agent/.config/gh
-      - dorch_claude:/home/agent/.claude
-      - dorch_codex:/home/agent/.codex
-      - dorch_pi:/home/agent/.pi
-      - dorch_herdr:/home/agent/.config/herdr
-      - dorch_uvcache:/home/agent/.cache/uv
+      - dorcheco_gh:/home/agent/.config/gh
+      - dorcheco_claude:/home/agent/.claude
+      - dorcheco_codex:/home/agent/.codex
+      - dorcheco_pi:/home/agent/.pi
+      - dorcheco_herdr:/home/agent/.config/herdr
+      - dorcheco_uvcache:/home/agent/.cache/uv
 
 volumes:
-  dorch_worktrees:
-  dorch_gh:
-  dorch_claude:
-  dorch_codex:
-  dorch_pi:
-  dorch_herdr:
-  dorch_uvcache:
+  dorcheco_worktrees:
+  dorcheco_gh:
+  dorcheco_claude:
+  dorcheco_codex:
+  dorcheco_pi:
+  dorcheco_herdr:
+  dorcheco_uvcache:

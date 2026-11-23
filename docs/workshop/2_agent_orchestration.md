@@ -29,10 +29,10 @@ TBD
 
 ## 3. Dorch + Herdr
 
-- Lean workshop sandbox in [`.agents/dorch/`](../../.agents/dorch/README.md): launch Docker + [Herdr](https://herdr.dev) in one command via `./scripts/dorch.sh` (no `~/.zshrc` edits)
+- Lean workshop sandbox in [`.agents/dorcheco/`](../../.agents/dorcheco/README.md): launch Docker + [Herdr](https://herdr.dev) in one command via `./scripts/dorcheco.sh` (no `~/.zshrc` edits; isolated from any existing `dorch` install)
   - Mounts only this repo at `/workspace` and mounts `data/raw/` read-only (`:ro`)
   - Pre-installs `claude`, `codex`, `pi`, and this repo's custom `econ-agent-harness` side by side
-  - Separates `ORCHESTRATOR.md`, `WORKER.md`, and `REVIEWER.md` under [`.agents/dorch/roles/`](../../.agents/dorch/roles/)
+  - Separates `ORCHESTRATOR.md`, `WORKER.md`, and `REVIEWER.md` under [`.agents/dorcheco/roles/`](../../.agents/dorcheco/roles/)
 - Full multi-project launcher: [Dorch](https://github.com/corybaird/dorch)
 
 ## 4. The workshop tasks
