@@ -44,9 +44,10 @@ Start here, in order:
 
 ## 3. Agent/harness as INFRASTRUCTURE
 
-- **Out-of-the-box harnesses:** agent (claude code, codex, pi)
-  -   Default prompts (leveraging tools from section 1)
-  -   Skills (leveraging tools from section 2)
+- **Out-of-the-box harnesses:** agent (claude code, codex, pi) — see [`.agents/`](.agents/README.md)
+  -   Default prompt ([`.agents/prompts/1_research_basics.md`](.agents/prompts/1_research_basics.md)) leveraging tools from section 1
+  -   Library skills ([`.agents/skills/`](.agents/skills/)) leveraging tools from section 2
+  -   Combined lean system prompt ([`.agents/prompts/2_combined_econ_prompt.md`](.agents/prompts/2_combined_econ_prompt.md)) merging sections 1 and 2 to reduce token bloat
 - **Custom harness:** Pydantic harness optimized for economic workflows
 - **[Dorch](https://github.com/corybaird/dorch):** My custom software tool for coding agents in a Docker container *(link coming)*
   - [Herdr](https://github.com/herdrdev/herdr) agent orchestration/delgation (works across Claude Code, Pi, and Antigravity)
@@ -56,8 +57,11 @@ Start here, in order:
 ## Project layout
 
 ```text
+.agents/
+├── prompts/                # Section 1 default prompt + lean combined prompt
+└── skills/                 # one SKILL.md per Section 2 library
 src/
-├── econ_agent_harness/     # setup, pipeline, verify, agent
+├── econ_agent_harness/     # setup, pipeline, verify, agent, benchmark
 └── economic_libraries/     # one folder per tool, plus verify_paper_claims
 data/
 ├── raw/                    # immutable inputs, terms in data/LICENSES.md
