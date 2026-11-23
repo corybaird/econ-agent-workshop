@@ -29,9 +29,11 @@ TBD
 
 ## 3. Dorch + Herdr
 
-- [Dorch](https://github.com/corybaird/dorch): My custom software tool for coding agents in a Docker container
-  - [Herdr](https://github.com/herdrdev/herdr): Agent orchestration/delegation (works across Claude Code, Pi, and Antigravity)
-  - Agents only see the project folder you start them in, not the rest of your computer
+- Lean workshop sandbox in [`.agents/dorch/`](../../.agents/dorch/README.md): launch Docker + [Herdr](https://herdr.dev) in one command via `./scripts/dorch.sh` (no `~/.zshrc` edits)
+  - Mounts only this repo at `/workspace` and mounts `data/raw/` read-only (`:ro`)
+  - Pre-installs `claude`, `codex`, `pi`, and this repo's custom `econ-agent-harness` side by side
+  - Separates `ORCHESTRATOR.md`, `WORKER.md`, and `REVIEWER.md` under [`.agents/dorch/roles/`](../../.agents/dorch/roles/)
+- Full multi-project launcher: [Dorch](https://github.com/corybaird/dorch)
 
 ## 4. The workshop tasks
 Dorch: 
