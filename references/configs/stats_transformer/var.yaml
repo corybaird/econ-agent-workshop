@@ -1,0 +1,10 @@
+# Reduced-form VAR on US real GDP, consumption and investment.
+# Consumed by src/economic_libraries/stats_transformer/var.py
+# The data ship inside stats-transformer; see stats_transformer.data.load_example.
+data:
+  example_dataset: macrodata
+
+model:
+  model_type: var
+  target_variables: [realgdp, realcons, realinv]
+  maxlags: 2
