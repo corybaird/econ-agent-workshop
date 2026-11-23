@@ -22,6 +22,6 @@ data/final/*
 reports/runs/
 reports/verification/
 reports/visualizations/
-.agents/dorch/.env
+.agents/dorcheco/.env
 .herdr/
 docs/herdr/

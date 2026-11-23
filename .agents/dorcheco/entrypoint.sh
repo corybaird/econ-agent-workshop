@@ -50,7 +50,7 @@ open_tabs() {
   done
 }
 
-if [ "${DORCH_AUTOTABS:-1}" != "0" ]; then
+if [ "${DORCHECO_AUTOTABS:-1}" != "0" ]; then
   open_tabs >/tmp/dorcheco-tabs.log 2>&1 &
 fi
 

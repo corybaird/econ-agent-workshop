@@ -1,6 +1,6 @@
-# Dorch: Lean Docker + Herdr Multi-Agent Sandbox
+# Dorcheco: Lean Docker + Herdr Multi-Agent Sandbox
 
-Minimal Docker + [Herdr](https://herdr.dev) setup for this workshop repository. No `~/.zshrc` edits or shell wrapper scripts required.
+Minimal Docker + [Herdr](https://herdr.dev) setup (`dorcheco`) for this workshop repository. No `~/.zshrc` edits or shell wrapper scripts required, and uses isolated `dorcheco_*` volumes so it never collides with an existing `dorch` install.
 
 ## What It Provides
 
@@ -23,19 +23,19 @@ Minimal Docker + [Herdr](https://herdr.dev) setup for this workshop repository. 
 1. Create your local `.env` (gitignored) with whichever provider keys you use:
 
 ```bash
-cp .agents/dorch/.env.example .agents/dorch/.env
+cp .agents/dorcheco/.env.example .agents/dorcheco/.env
 ```
 
 2. Build and launch Docker + Herdr (opens labeled tabs for `claude`, `codex`, `pi`, and `econ-harness`):
 
 ```bash
-./scripts/dorch.sh
+./scripts/dorcheco.sh
 ```
 
 3. Inside the container, try Workshop Task 1 ([demo/BRIEF_task1_config.md](demo/BRIEF_task1_config.md)) from your Orchestrator tab:
 
 ```text
-Read /etc/herdr/roles/ORCHESTRATOR.md and dispatch .agents/dorch/demo/BRIEF_task1_config.md to a Worker in a new worktree, then have a Reviewer audit the diff.
+Read /etc/herdr/roles/ORCHESTRATOR.md and dispatch .agents/dorcheco/demo/BRIEF_task1_config.md to a Worker in a new worktree, then have a Reviewer audit the diff.
 ```
 
 ## Useful Herdr Keybindings (`ctrl+b` prefix)
