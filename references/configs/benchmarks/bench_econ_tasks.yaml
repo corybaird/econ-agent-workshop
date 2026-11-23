@@ -1,0 +1,153 @@
+seed: 42
+timeout_sec: 180
+output_dir: data/final/benchmarks
+
+bare_venv_path: /tmp/econ-bench-bare-venv
+bare_packages:
+  - pandas
+  - numpy
+  - statsmodels
+  - pymupdf
+  - pyyaml
+
+pi_options:
+  thinking: low
+  disable_user_extensions: true
+
+models:
+  - label: glm-5.3-flash
+    provider: ollama-api-key
+    model: glm-5.3-flash:cloud
+  - label: beam
+    provider: ollama-api-key
+    model: beam
+
+arms:
+  - id: C0_bare
+    label: "Bare Control (no prompt, no skills, no custom libs)"
+    venv: bare
+    prompt_path: null
+    skill_paths: []
+  - id: C1_prompt_only
+    label: "Section 1 Prompt Only (no skills)"
+    venv: workshop
+    prompt_path: .agents/prompts/1_research_basics.md
+    skill_paths: []
+  - id: C2_prompt_skills
+    label: "Section 1 Prompt + 4 Modular Skills"
+    venv: workshop
+    prompt_path: .agents/prompts/1_research_basics.md
+    skill_paths:
+      - .agents/skills
+  - id: C3_combined
+    label: "Combined Lean Prompt (no separate skills)"
+    venv: workshop
+    prompt_path: .agents/prompts/2_combined_econ_prompt.md
+    skill_paths: []
+  - id: C4_custom_harness
+    label: "Custom Pydantic-AI Econ Harness (walled tools)"
+    harness: custom
+    venv: workshop
+    prompt_path: null
+    skill_paths: []
+
+synthetic_data:
+  n_countries: 10
+  n_quarters: 32
+  start_year: 2017
+  dgp:
+    intercept: 2.0
+    slope_unemp: -0.60
+    persistence: 0.50
+    noise_std: 0.20
+
+tasks:
+  - id: t1_proxy_svar
+    enabled: true
+    title: "Macro Transforms + Proxy-SVAR (Partial-Sample Instrument) + IRFs"
+    expected_libraries:
+      - stats_transformer
+    expected_extensions:
+      - ".csv"
+      - ".tex"
+    require_provenance_markers: false
+    numerical_check: proxy_svar_irf
+    prompt: >-
+      Using data/raw/macro_monthly.csv (240 monthly obs: date, country,
+      policy_rate, ip_level, cpi_level, mp_shock; note mp_shock is NaN for the
+      first 48 months), perform the following macroeconometric workflow:
+      (1) construct year-over-year percent changes of ip_level and cpi_level
+      (do not drop the early months where mp_shock is NaN when estimating the
+      reduced-form VAR);
+      (2) estimate a 4-lag Gertler-Karadi / Mertens-Ravn Proxy-SVAR ordered as
+      [policy_rate, ip_yoy, cpi_yoy] using mp_shock as the external instrument
+      identifying the structural monetary policy shock on policy_rate;
+      (3) compute 1-standard-deviation structural shock impulse responses (IRFs)
+      for horizons h = 0..12, save the IRF table as both CSV and LaTeX (.tex),
+      and save the full model summary. Keep data/raw/ untouched, run your code
+      to verify exit code 0, and report the h=0 impact on policy_rate and the
+      h=0 and h=6 impulse responses of ip_yoy.
+
+  - id: t1_panel_ols
+    enabled: false
+    title: "Panel Fixed-Effects Estimation + LaTeX Table"
+    expected_libraries:
+      - stats_transformer
+    expected_extensions:
+      - ".tex"
+    require_provenance_markers: false
+    prompt: >-
+      Using data/raw/macro_panel.csv (columns: country, quarter, inflation,
+      unemployment_gap, lag_inflation), estimate a country fixed-effects panel
+      OLS regression of inflation on unemployment_gap and lag_inflation. Save
+      the estimation summary and a clean LaTeX regression table (.tex), keep
+      data/raw/ untouched, run your code to verify it exits cleanly, and report
+      the estimated coefficient on unemployment_gap and the command to reproduce
+      the run.
+
+  - id: t2_text_and_pdf
+    enabled: true
+    title: "Central Bank Tone + PDF Claim Extraction"
+    expected_libraries:
+      - auto_econ_sentiment
+      - econ_pdf_extract
+    expected_extensions:
+      - ".csv"
+      - ".md"
+    require_provenance_markers: true
+    prompt: >-
+      Complete two auditable steps in a reproducible workflow: (1) score central
+      bank tone in data/raw/cb_statements.csv (columns: date, statement_id, text)
+      using a declared central-bank economic dictionary and save a scored CSV
+      that includes matched positive/negative words and notes the dictionary
+      directionality; (2) extract empirical claims with exact section headings
+      and page numbers from data/raw/synthetic_wp.pdf and save a Markdown report
+      (.md). Keep data/raw/ untouched, run your code to verify it works, and
+      report the command to reproduce it.
+
+  - id: t3_verify_pipeline
+    enabled: true
+    title: "End-to-End Extract-Estimate-Verify Pipeline"
+    expected_libraries:
+      - econ_pdf_extract
+      - stats_transformer
+      - reproducible_econ
+    expected_extensions:
+      - ".tex"
+      - ".json"
+    require_provenance_markers: true
+    prompt: >-
+      Build a single-command reproducible pipeline that: (1) extracts the
+      headline empirical claim with section and page provenance from
+      data/raw/synthetic_wp.pdf; (2) estimates the country fixed-effects panel
+      regression of inflation on unemployment_gap and lag_inflation from
+      data/raw/macro_panel.csv; (3) checks the extracted claim against the
+      estimated coefficient with cached stages, a LaTeX macro file (.tex), and a
+      provenance run manifest (.json). Keep data/raw/ untouched and verify the
+      pipeline runs cleanly.
+
+langfuse:
+  enabled: true
+  tags:
+    - econ-agent-workshop
+    - prompt-skill-benchmark
