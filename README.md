@@ -59,7 +59,8 @@ Start here, in order:
 ```text
 .agents/
 ├── prompts/                # Section 1 default prompt + lean combined prompt
-└── skills/                 # one SKILL.md per Section 2 library
+├── skills/                 # one SKILL.md per Section 2 library
+└── dorch/                  # lean Docker + Herdr sandbox (./scripts/dorch.sh)
 src/
 ├── econ_agent_harness/     # setup, pipeline, verify, agent, benchmark
 └── economic_libraries/     # one folder per tool, plus verify_paper_claims
