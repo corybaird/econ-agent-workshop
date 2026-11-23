@@ -106,16 +106,11 @@ Four standardized parquet files under `data/raw/nakamura_steinsson_2018/`
   policy surprises from Acosta, Brennan, and Jacobson (2024), above; its `ns`
   series is the policy news shock of Nakamura and Steinsson (2018)
 
-### Country panel and country codes — `stats_transformer/country_panel.yaml`
+### Country panel — `stats_transformer/country_panel.yaml`
 
 - `stats-transformer` bundled example `macrodb_gdp_inflation`, annual inflation by
   country. Its registry gives the source only as a cross-country macroeconomic
   database. The example uses inflation for 1971–2019 and no other series.
-- Country codes in `references/dictionaries/dict_country_converter.py` come from
-  Konstantin Stadler (2017). "The Country Converter Coco - A Python Package for
-  Converting Country Names between Different Classification Schemes." *Journal of
-  Open Source Software*, 2(16), 332.
-  doi:[10.21105/joss.00332](https://doi.org/10.21105/joss.00332)
 
 ### Notebook datasets — `notebooks/`
 

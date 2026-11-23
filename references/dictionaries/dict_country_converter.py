@@ -1,4 +1,4 @@
-# Country code lookups from country_converter (https://github.com/IndEcol/country_converter),
+# Country code lookups between ISO2, ISO3 and country names,
 # with aliases such as UK and EL as plain keys. Import as:
 # from references.dictionaries.dict_country_converter import dict_country
 dict_country = {
