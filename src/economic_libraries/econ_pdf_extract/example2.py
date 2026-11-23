@@ -1,6 +1,6 @@
 """Example 2: offline claim evaluation against verbatim reference claims.
 
-The reference YAML in references/configs/econ_pdf_extract_example_refs/ quotes
+The reference YAML in references/configs/econ_pdf_extract/ quotes
 the synthetic example paper verbatim. ClaimEvaluator re-runs the extraction
 pipeline, scores extracted claims against the references (token F1 /
 sequence ratio), and reports recall/precision plus page and section accuracy.
@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 def run():
     logging.basicConfig(level=logging.INFO, format="%(name)s - %(levelname)s - %(message)s")
-    with open(PROJECT_ROOT / "references/configs/econ_pdf_extract_example.yaml") as f:
+    with open(PROJECT_ROOT / "references/configs/econ_pdf_extract/extraction.yaml") as f:
         config = yaml.safe_load(f)
     eval_cfg, expected = config["eval"], config["expected_eval"]
     paper = PaperMetadata(

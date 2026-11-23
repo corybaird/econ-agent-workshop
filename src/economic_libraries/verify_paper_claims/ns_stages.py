@@ -1,5 +1,5 @@
 """Adapted from reproducible-econ's projects/nakamura_steinsson_2018/stages.py
-(reference project), trimmed to the stages the linked demo needs."""
+(reference project), trimmed to the stages this example needs."""
 
 import logging
 from pathlib import Path

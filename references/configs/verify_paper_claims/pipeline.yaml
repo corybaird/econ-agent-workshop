@@ -1,13 +1,13 @@
-# Linked demo: Nakamura and Steinsson (2018) NBER WP 19260 extract-then-verify
+# Verify paper claims: Nakamura and Steinsson (2018) NBER WP 19260 extract-then-verify
 # pipeline. Stages adapted from econ-pdf-extract + reproducible-econ reference
 # project; the claims.entries injected at runtime by
-# src/economic_libraries/linked_demo/demo.py come from the AI-drafted map
-# in references/configs/linked_demo_claim_map.yaml. cache_dir and reports_dir
+# src/economic_libraries/verify_paper_claims/demo.py come from the AI-drafted map
+# in references/configs/verify_paper_claims/paper_claims.yaml. cache_dir and reports_dir
 # are anchored to the repo root by reproducible-econ's config loader.
 includes: []
 
 project:
-  name: linked_demo_nakamura_steinsson_2018
+  name: verify_paper_claims_nakamura_steinsson_2018
   seed: 42
 
 data:
@@ -48,18 +48,18 @@ estimation:
       dependent: d_breakeven10
 
 output:
-  cache_dir: data/cache/linked_demo
-  reports_dir: data/final/linked_demo/${run_timestamp}
+  cache_dir: data/cache/verify_paper_claims
+  reports_dir: data/final/verify_paper_claims/${run_timestamp}
   claims_path: ${output.reports_dir}/claims_report.json
 
-# Entries are injected at runtime from linked_demo_claim_map.yaml (mapping
+# Entries are injected at runtime from verify_paper_claims/paper_claims.yaml (mapping
 # of extracted paper claims to specs); running this config directly without the
 # demo injects nothing.
 claims:
   fail_on_error: false
   entries: []
 
-default_module: economic_libraries.linked_demo.ns_stages
+default_module: economic_libraries.verify_paper_claims.ns_stages
 
 stages:
   - name: prepare_event_data

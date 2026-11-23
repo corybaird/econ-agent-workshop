@@ -29,7 +29,7 @@ SENTENCES = [
 
 def run():
     logging.basicConfig(level=logging.INFO, format="%(name)s - %(levelname)s - %(message)s")
-    with open(PROJECT_ROOT / "references/configs/auto_econ_sentiment_lexical.yaml") as f:
+    with open(PROJECT_ROOT / "references/configs/auto_econ_sentiment/lexical.yaml") as f:
         config = yaml.safe_load(f)
     lexical_cfg = config["lexical"]
     dictionary, agg = lexical_cfg["dictionary"], lexical_cfg["aggregation"]

@@ -1,0 +1,44 @@
+# Paper to download, and the claims to verify against re-estimated regressions.
+# Consumed by src/economic_libraries/verify_paper_claims/demo.py.
+#
+# Honesty contract: extraction proposes, the claims below map (AI-drafted, to be
+# confirmed by a person), the pipeline verifies. The extractor never decides what a number means.
+paper:
+  id: nakamura_steinsson_2018_wp
+  authors: "Emi Nakamura and Jon Steinsson"
+  title: "High Frequency Identification of Monetary Non-Neutrality: The Information Effect"
+  journal: "NBER Working Paper 19260"
+  url: https://www.nber.org/system/files/working_papers/w19260/w19260.pdf
+  pdf_path: data/raw/nakamura_steinsson_w19260.pdf
+  # SHA-256 of the PDF the demo verified on first run; a mismatch blocks the run
+  # instead of silently verifying claims against a different paper draft.
+  sha256: ef562fa6f42a5a21fd68d0be09d9e5e1beb62393c1b5e16829edc13feb1068a7
+
+pipeline_config_path: references/configs/verify_paper_claims/pipeline.yaml
+drafts_dir: data/intermediate/verify_paper_claims
+claims_stage: check_claims
+
+# AI-drafted mapping: extracted claim (econ-pdf-extract draft) -> spec
+# (references/configs/verify_paper_claims/pipeline.yaml) + published value + tolerance.
+#
+# Drafted by an AI worker and not yet confirmed by a person. The demo checks that
+# each quote span below appears in the claim extracted from NBER Working Paper
+# 19260. Only claims whose number is literally present in a draft quote are mapped;
+# numbers the replication does not estimate (instantaneous forward rates, stock prices, model parameters) stay
+# unmapped. Coef is the published value in basis points (PDF) expressed in
+# the regression's units (1 basis point = 0.01 percentage points -> 110bp = 1.10).
+claims:
+  - claim_id: CLM-013
+    quote_span: "peaks at 110 basis points for the 2-year yield"
+    page: 12
+    spec: nominal_2y
+    key_variable: ns
+    coef: 1.10
+    tol: 0.10
+  - claim_id: CLM-013
+    quote_span: "38 basis points for the 10-year yield"
+    page: 12
+    spec: nominal_10y
+    key_variable: ns
+    coef: 0.38
+    tol: 0.05

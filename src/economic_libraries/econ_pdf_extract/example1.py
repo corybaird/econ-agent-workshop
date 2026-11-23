@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 def run():
     logging.basicConfig(level=logging.INFO, format="%(name)s - %(levelname)s - %(message)s")
-    with open(PROJECT_ROOT / "references/configs/econ_pdf_extract_example.yaml") as f:
+    with open(PROJECT_ROOT / "references/configs/econ_pdf_extract/extraction.yaml") as f:
         config = yaml.safe_load(f)
     pdf_path = PROJECT_ROOT / config["input"]["pdf_path"]
 
