@@ -64,7 +64,7 @@ data/
 ├── intermediate/           # regenerable by code (placeholder)
 └── final/                  # analysis-ready outputs (placeholder)
 references/
-├── configs/                # model decisions in YAML
+├── configs/                # model decisions in YAML, one folder per library
 └── dictionaries/           # shared lookup tables
 docs/                       # framing and workshop guides
 tests/

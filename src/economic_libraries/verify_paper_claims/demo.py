@@ -1,14 +1,14 @@
-"""Linked extract-then-verify demo: econ-pdf-extract + reproducible-econ.
+"""Verify paper claims: econ-pdf-extract extracts them, reproducible-econ checks them.
 
 Pipeline: download the public Nakamura and Steinsson NBER Working Paper 19260
 PDF (SHA-256 checked), extract claims with page provenance via econ-pdf-extract,
 write the numeric ones out as DRAFT ClaimCheckStage entries, apply the
-AI-drafted mapping in references/configs/linked_demo_claim_map.yaml (not yet
+AI-drafted mapping in references/configs/verify_paper_claims/paper_claims.yaml (not yet
 confirmed by a person), then re-estimate the Nakamura and
 Steinsson event-study regressions with reproducible-econ and verify each mapped
 claim against the estimated coefficients. Draft claims and the injected
-pipeline config land under data/intermediate/linked_demo/; the claims report
-and run manifest land under data/final/linked_demo/.
+pipeline config land under data/intermediate/verify_paper_claims/; the claims report
+and run manifest land under data/final/verify_paper_claims/.
 """
 
 import hashlib
@@ -28,11 +28,11 @@ from economic_libraries.paths import PROJECT_ROOT
 
 logger = logging.getLogger(__name__)
 
-CONFIG_PATH = "references/configs/linked_demo_demo.yaml"
+CONFIG_PATH = "references/configs/verify_paper_claims/paper_claims.yaml"
 
 
-class LinkedDemo:
-    """Run the extract-then-verify demo end to end."""
+class VerifyPaperClaims:
+    """Extract claims from a paper and verify them against re-estimates."""
 
     def __init__(self, config_path=None):
         self.config_path = config_path or CONFIG_PATH
@@ -50,7 +50,7 @@ class LinkedDemo:
                     len(result.claims), Path(pdf_path).name, result.page_count, len(drafts))
 
         stamp = f"{datetime.now():%Y%m%d_%H%M%S}"
-        drafts_dir = PROJECT_ROOT / f"data/intermediate/linked_demo/{stamp}"
+        drafts_dir = PROJECT_ROOT / f"data/intermediate/verify_paper_claims/{stamp}"
         drafts_dir.mkdir(parents=True, exist_ok=True)
         self._write_drafts(drafts, drafts_dir / "claim_drafts.yaml")
 
@@ -96,7 +96,7 @@ class LinkedDemo:
 
     @staticmethod
     def _write_drafts(claims, path):
-        payload = {"note": "DRAFT entries extracted by econ-pdf-extract; a subset is mapped in linked_demo_claim_map.yaml", "entries": [
+        payload = {"note": "DRAFT entries extracted by econ-pdf-extract; a subset is mapped in verify_paper_claims/paper_claims.yaml", "entries": [
             {"claim_id": c.claim_id, "page": c.page, "section": c.section, "quote": c.quote} for c in claims
         ]}
         with open(path, "w") as f:
@@ -106,10 +106,8 @@ class LinkedDemo:
     def _apply_claim_map(self, config, drafts):
         """Validate the committed claim map against the drafts and build ClaimCheckStage entries."""
         by_id = {c.claim_id: c for c in drafts}
-        with open(PROJECT_ROOT / config["claim_map_path"]) as f:
-            map_cfg = yaml.safe_load(f)
         entries = []
-        for entry in map_cfg["entries"]:
+        for entry in config["claims"]:
             claim = by_id.get(entry["claim_id"])
             if claim is None:
                 raise AssertionError(f"claim map references {entry['claim_id']} but no such draft claim was extracted")
@@ -133,7 +131,7 @@ class LinkedDemo:
         with open(PROJECT_ROOT / config["pipeline_config_path"]) as f:
             pipeline_cfg = yaml.safe_load(f)
         pipeline_cfg["claims"]["entries"] = claims_entries
-        injected_path = (PROJECT_ROOT / f"data/intermediate/linked_demo/{stamp}/pipeline_injected.yaml")
+        injected_path = (PROJECT_ROOT / f"data/intermediate/verify_paper_claims/{stamp}/pipeline_injected.yaml")
         injected_path.parent.mkdir(parents=True, exist_ok=True)
         with open(injected_path, "w") as f:
             yaml.safe_dump(pipeline_cfg, f, sort_keys=False)
@@ -162,4 +160,4 @@ class LinkedDemo:
 
 
 if __name__ == "__main__":
-    LinkedDemo().run()
+    VerifyPaperClaims().run()

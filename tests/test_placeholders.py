@@ -7,12 +7,12 @@ import economic_libraries.auto_econ_sentiment.example1
 import economic_libraries.auto_econ_sentiment.example2
 import economic_libraries.econ_pdf_extract.example1
 import economic_libraries.econ_pdf_extract.example2
-import economic_libraries.linked_demo.demo
 import economic_libraries.paths
 import economic_libraries.reproducible_econ.example1
 import economic_libraries.reproducible_econ.example2
 import economic_libraries.stats_transformer.example1
 import economic_libraries.stats_transformer.example2
+import economic_libraries.verify_paper_claims.demo
 
 STUB_MODULES = (
     econ_agent_harness.setup,
@@ -56,8 +56,8 @@ def test_implemented_examples_run():
         module.run()
 
 
-def test_linked_demo_runs():
+def test_verify_paper_claims_runs():
     ns_dir = economic_libraries.paths.PROJECT_ROOT / "data/raw/nakamura_steinsson_2018"
     if not all((ns_dir / f).is_file() for f in NS_RAW_FILES):
         pytest.skip("Nakamura and Steinsson raw data absent (fresh clone)")
-    economic_libraries.linked_demo.demo.LinkedDemo().run()
+    economic_libraries.verify_paper_claims.demo.VerifyPaperClaims().run()

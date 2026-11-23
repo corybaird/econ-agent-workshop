@@ -3,19 +3,19 @@
 Full citations for every paper, dataset, and dictionary used by the workshop
 examples in this repo, mirroring the inputs declared in
 `references/configs/` and `data/raw/`. Grep targets:
-`references/configs/*.yaml`, `src/economic_libraries/*/example*.py`,
+`references/configs/**/*.yaml`, `src/economic_libraries/*/example*.py`,
 `data/raw/*`.
 
 ## Papers
 
-### Nakamura and Steinsson (2018) — used in the linked extract-then-verify demo
+### Nakamura and Steinsson (2018) — used in the `verify_paper_claims` example
 
 - Emi Nakamura and Jón Steinsson (2018). "High-Frequency Identification of
   Monetary Non-Neutrality: The Information Effect." *Quarterly Journal of
   Economics*, 133(3), 1283–1330. doi:[10.1093/qje/qjy004](https://doi.org/10.1093/qje/qjy004)
 - Earlier version: NBER Working Paper 19260, "High Frequency Identification of
   Monetary Non-Neutrality: The Information Effect"
-  (https://www.nber.org/papers/w19260). The linked demo extracts headline
+  (https://www.nber.org/papers/w19260). The example extracts headline
   claims from this public working paper and verifies them against the
   replication estimates. PDF: https://www.nber.org/system/files/working_papers/w19260/w19260.pdf
 - Replication inputs used here: raw Treasury/TIPS yields, FOMC meeting flags,
@@ -41,7 +41,7 @@ examples in this repo, mirroring the inputs declared in
   *Review of Finance*, 25(1), 85–120.
   doi:[10.1093/rof/rfaa014](https://doi.org/10.1093/rof/rfaa014)
 
-### Hubert and Labondance (2021) — "hubert" dictionary (default in `auto_econ_sentiment_lexical.yaml`)
+### Hubert and Labondance (2021) — "hubert" dictionary (default in `auto_econ_sentiment/lexical.yaml`)
 
 - Paul Hubert and Fabien Labondance (2021). "The Signaling Effects of Central
   Bank Tone." *European Economic Review*, 142, 103684.
@@ -76,7 +76,7 @@ examples in this repo, mirroring the inputs declared in
 
 ## Datasets
 
-### Grunfeld (1958) corporate investment panel — `stats_transformer_grunfeld_panel.yaml`
+### Grunfeld (1958) corporate investment panel — `stats_transformer/panel_ols.yaml`
 
 Original source:
 
@@ -128,6 +128,6 @@ Four standardized parquet files under `data/raw/nakamura_steinsson_2018/`
   with econ-pdf-extract ("A Synthetic Economics Working Paper", Example A.
   Author). Not real research output; used to demo claims/formula/statistics
   extraction with verbatim reference labels in
-  `references/configs/econ_pdf_extract_example_refs/`.
+  `references/configs/econ_pdf_extract/`.
 - `data/raw/sentiment_sample.csv` — small synthetic sentiment demo sample
   bundled in this repo for `auto_econ_sentiment` examples. Not real data.

@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 def run():
     logging.basicConfig(level=logging.INFO, format="%(name)s - %(levelname)s - %(message)s")
-    with open(PROJECT_ROOT / "references/configs/auto_econ_sentiment_lexical.yaml") as f:
+    with open(PROJECT_ROOT / "references/configs/auto_econ_sentiment/lexical.yaml") as f:
         config = yaml.safe_load(f)
     input_cfg, lexical_cfg = config["input"], config["lexical"]
     score_col = f"{lexical_cfg['dictionary']}_sentiment_{lexical_cfg['aggregation']}"

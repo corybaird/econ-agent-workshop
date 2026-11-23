@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def run():
     logging.basicConfig(level=logging.INFO, format="%(name)s - %(levelname)s - %(message)s")
-    with open(PROJECT_ROOT / "references/configs/stats_transformer_grunfeld_panel.yaml") as f:
+    with open(PROJECT_ROOT / "references/configs/stats_transformer/panel_ols.yaml") as f:
         config = yaml.safe_load(f)
     data_cfg, model_cfg = config["data"], config["model"]
     panel_cfg = model_cfg.get("panel_ols", {})

@@ -5,7 +5,7 @@ input:
   pdf_path: data/raw/example_paper.pdf
 
 eval:
-  refs_dir: references/configs/econ_pdf_extract_example_refs
+  refs_dir: references/configs/econ_pdf_extract
   seq_threshold: 0.72
   f1_threshold: 0.75
 
