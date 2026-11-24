@@ -9,14 +9,15 @@ if [ -n "${GIT_USER_EMAIL:-}" ]; then
   git config --global user.email "$GIT_USER_EMAIL"
 fi
 
-# Ensure mounted Docker volumes are writable by the current non-root user (handles macOS UID 501 vs root)
-sudo chown -R "$(id -u):$(id -g)" \
-  "$HOME/.config/gh" "$HOME/.config/herdr" \
-  "$HOME/.claude" "$HOME/.codex" "$HOME/.pi" "$HOME/.gemini" "$HOME/.cache/uv" \
-  /workspace-worktrees 2>/dev/null || true
+# Verify mounted volumes match container UID (rebuild via ./scripts/agent_tests/dorcheco.sh --build if mismatched)
+mkdir -p "$HOME/.codex" "$HOME/.pi/agent" "$HOME/.gemini" 2>/dev/null || true
+if [ ! -w "$HOME/.codex" ] || [ ! -w "$HOME/.pi" ]; then
+  echo "ERROR: Mounted dorcheco volumes are owned by a different UID than $(id -u)." >&2
+  echo "Fix by rebuilding with your host UID: ./scripts/agent_tests/dorcheco.sh --build" >&2
+  exit 1
+fi
 
 # Seed Section 1+2 combined prompt for Codex, Pi, and Antigravity (Claude reads /etc/claude-code/CLAUDE.md)
-mkdir -p "$HOME/.codex" "$HOME/.pi/agent" "$HOME/.gemini"
 cp /etc/econ-agent/PROMPT.md "$HOME/.codex/instructions.md"
 cp /etc/econ-agent/PROMPT.md "$HOME/.pi/agent/AGENTS.md"
 cp /etc/econ-agent/PROMPT.md "$HOME/.gemini/GEMINI.md"

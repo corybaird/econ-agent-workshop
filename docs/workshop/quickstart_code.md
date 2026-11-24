@@ -155,10 +155,9 @@ Requires Docker Desktop running. Mounts only this repo at `/workspace`, keeps `d
 # Normal launch (also accepts optional "up"):
 ./scripts/agent_tests/dorcheco.sh
 
-# Clean reset + rebuild after Dockerfile or entrypoint changes:
+# Clean reset + rebuild with host UID after Dockerfile or entrypoint changes:
 docker rm -f $(docker ps -aq --filter "name=dorcheco") 2>/dev/null || true
-docker compose -f .agents/dorcheco/docker-compose.yml build
-./scripts/agent_tests/dorcheco.sh
+./scripts/agent_tests/dorcheco.sh --build
 ```
 
 See [`.agents/dorcheco/README.md`](../../.agents/dorcheco/README.md) for container setup, Herdr keybindings (`ctrl+b` then `n`/`p`/`v`/`c`/`q`), and API key configuration.

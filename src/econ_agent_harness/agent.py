@@ -30,7 +30,18 @@ def _load_env_files(root=ROOT):
 
 
 _load_env_files()
-MODEL = os.getenv("ECON_AGENT_MODEL") or "test"
+
+
+def _default_model():
+    configured = (os.getenv("ECON_AGENT_MODEL") or "").strip()
+    if configured:
+        return configured
+    if os.getenv("OLLAMA_API_KEY"):
+        return f"ollama:{os.getenv('PI_OLLAMA_MODEL') or 'glm-5.3-flash:cloud'}"
+    return "test"
+
+
+MODEL = _default_model()
 
 
 def _resolve_model(provider, model_name):
