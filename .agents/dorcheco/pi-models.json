@@ -1,0 +1,59 @@
+{
+  "providers": {
+    "ollama-api-key": {
+      "api": "openai-completions",
+      "apiKey": "$OLLAMA_API_KEY",
+      "baseUrl": "https://ollama.com/v1",
+      "models": [
+        {
+          "id": "glm-5.3-flash:cloud",
+          "contextWindow": 202752,
+          "input": ["text"],
+          "reasoning": true
+        },
+        {
+          "id": "beam",
+          "contextWindow": 1048576,
+          "input": ["text"],
+          "reasoning": true
+        },
+        {
+          "id": "glm-5.3",
+          "contextWindow": 1048576,
+          "input": ["text"],
+          "reasoning": true
+        },
+        {
+          "id": "deepseek-v4.1-flash:1017",
+          "contextWindow": 1048576,
+          "input": ["text", "image"],
+          "reasoning": true
+        },
+        {
+          "id": "gemma4:31b",
+          "contextWindow": 262144,
+          "input": ["text", "image"],
+          "reasoning": true
+        },
+        {
+          "id": "kimi-k3",
+          "contextWindow": 1048576,
+          "input": ["text", "image"],
+          "reasoning": true
+        },
+        {
+          "id": "minimax-m3.1-flash",
+          "contextWindow": 1000000,
+          "input": ["text", "image"],
+          "reasoning": true
+        },
+        {
+          "id": "gpt-oss:120b",
+          "contextWindow": 131072,
+          "input": ["text"],
+          "reasoning": true
+        }
+      ]
+    }
+  }
+}

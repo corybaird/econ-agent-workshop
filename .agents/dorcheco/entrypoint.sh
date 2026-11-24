@@ -20,6 +20,7 @@ mkdir -p "$HOME/.codex" "$HOME/.pi/agent" "$HOME/.gemini"
 cp /etc/econ-agent/PROMPT.md "$HOME/.codex/instructions.md"
 cp /etc/econ-agent/PROMPT.md "$HOME/.pi/agent/AGENTS.md"
 cp /etc/econ-agent/PROMPT.md "$HOME/.gemini/GEMINI.md"
+cp /etc/econ-agent/pi-models.json "$HOME/.pi/agent/models.json"
 
 # Open labeled Herdr tabs once the interactive TUI workspace initializes
 open_tabs() {
@@ -30,10 +31,15 @@ open_tabs() {
     sleep 0.5
   done
 
+  local pi_cmd="pi"
+  if [ -n "${OLLAMA_API_KEY:-}" ]; then
+    pi_cmd="pi --provider ollama-api-key --model ${PI_OLLAMA_MODEL:-glm-5.3-flash:cloud}"
+  fi
+
   local specs=(
     "claude=claude --dangerously-skip-permissions"
     "codex=codex"
-    "pi=pi"
+    "pi=${pi_cmd}"
     "agy=agy"
   )
   local reuse=1

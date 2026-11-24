@@ -20,10 +20,11 @@ Minimal Docker + [Herdr](https://herdr.dev) setup (`dorcheco`) for this workshop
 
 ## Quick Start
 
-1. Create your local `.env` (gitignored) with whichever provider keys you use:
+1. Create your local `.env` (gitignored — either repo root `.env` or `.agents/dorcheco/.env`) with whichever provider keys you use (setting `OLLAMA_API_KEY` automatically wires the `pi` tab to Ollama Cloud using `PI_OLLAMA_MODEL`, defaulting to `glm-5.3-flash:cloud`):
 
 ```bash
-cp .agents/dorcheco/.env.example .agents/dorcheco/.env
+cp .env.example .env
+# or: cp .agents/dorcheco/.env.example .agents/dorcheco/.env
 ```
 
 2. Build and launch Docker + Herdr (opens labeled tabs for `claude`, `codex`, `pi`, and `agy`):

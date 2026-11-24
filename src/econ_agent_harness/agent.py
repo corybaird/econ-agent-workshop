@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
 from pydantic_ai import Agent, ModelRetry, RunContext
 
 from econ_agent_harness.tools import EconHarnessToolkit
@@ -19,7 +20,35 @@ def _guarded(fn, *args, **kwargs):
         raise ModelRetry(f"{type(exc).__name__}: {exc}") from exc
 
 ROOT = Path(__file__).resolve().parents[2]
-MODEL = os.getenv("ECON_AGENT_MODEL", "test")
+
+
+def _load_env_files(root=ROOT):
+    for rel in (".env", ".agents/dorcheco/.env"):
+        env_path = Path(root) / rel
+        if env_path.is_file():
+            load_dotenv(env_path, override=False)
+
+
+_load_env_files()
+MODEL = os.getenv("ECON_AGENT_MODEL") or "test"
+
+
+def _resolve_model(provider, model_name):
+    if isinstance(model_name, str) and model_name.startswith("ollama:"):
+        provider = "ollama-api-key"
+        model_name = model_name.split(":", 1)[1]
+    if provider == "ollama-api-key":
+        from pydantic_ai.models.openai import OpenAIChatModel
+        from pydantic_ai.providers.openai import OpenAIProvider
+
+        api_key = os.getenv("OLLAMA_API_KEY")
+        if not api_key:
+            raise ValueError("OLLAMA_API_KEY is required for Ollama Cloud models; set it in .env or the environment.")
+        return OpenAIChatModel(
+            model_name,
+            provider=OpenAIProvider(base_url="https://ollama.com/v1", api_key=api_key),
+        )
+    return model_name
 
 HARNESS_SYSTEM_PROMPT = """You are a domain-specific economic research agent running inside a walled harness.
 - The harness enforces folder walls in code: data/raw/ is strictly read-only, and root clutter is blocked.
@@ -32,7 +61,7 @@ HARNESS_SYSTEM_PROMPT = """You are a domain-specific economic research agent run
 def build_agent(model=None, workspace_root=None):
     """Construct a walled pydantic-ai Agent and its toolkit bound to workspace_root."""
     toolkit = EconHarnessToolkit(workspace_root or ROOT)
-    active_model = model or MODEL
+    active_model = _resolve_model(None, model or MODEL) if isinstance(model or MODEL, str) else model
     harness_agent = Agent(active_model, system_prompt=HARNESS_SYSTEM_PROMPT, retries=3)
 
     @harness_agent.tool
@@ -148,7 +177,8 @@ class EconAgentHarness:
     def run(self):
         """Start an interactive REPL session."""
         history = []
-        print(f"econ-agent-harness agent (model={MODEL}, root={self.workspace_root})")
+        active_name = getattr(self.agent.model, "model_name", str(self.agent.model))
+        print(f"econ-agent-harness agent (model={active_name}, root={self.workspace_root})")
         print("Type a request. 'exit' to quit.")
         while True:
             try:
@@ -163,18 +193,6 @@ class EconAgentHarness:
             print("agent>", result.output)
 
 
-def _resolve_model(provider, model_name):
-    if provider == "ollama-api-key":
-        from pydantic_ai.models.openai import OpenAIChatModel
-        from pydantic_ai.providers.openai import OpenAIProvider
-
-        return OpenAIChatModel(
-            model_name,
-            provider=OpenAIProvider(base_url="https://ollama.com/v1", api_key=os.environ["OLLAMA_API_KEY"]),
-        )
-    return model_name
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run EconAgentHarness REPL or single benchmark task.")
     parser.add_argument("--workspace", default=None)
@@ -183,13 +201,13 @@ if __name__ == "__main__":
     parser.add_argument("--prompt", default=None)
     parser.add_argument("--out-json", default=None)
     args = parser.parse_args()
+    resolved = _resolve_model(args.provider, args.model or MODEL)
+    harness = EconAgentHarness(model=resolved, workspace_root=args.workspace)
     if args.prompt:
-        resolved = _resolve_model(args.provider, args.model or MODEL)
-        harness = EconAgentHarness(model=resolved, workspace_root=args.workspace)
         payload = harness.run_task(args.prompt)
         if args.out_json:
             Path(args.out_json).write_text(json.dumps(payload, indent=2))
         else:
             print(json.dumps(payload, indent=2))
     else:
-        EconAgentHarness(workspace_root=args.workspace).run()
+        harness.run()

@@ -10,6 +10,8 @@ services:
     stdin_open: true
     tty: true
     env_file:
+      - path: ../../.env
+        required: false
       - path: .env
         required: false
     security_opt:
