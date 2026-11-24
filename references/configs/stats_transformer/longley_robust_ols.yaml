@@ -1,0 +1,24 @@
+# YAML-driven featurization + HC3 Robust OLS on Longley macroeconomic data.
+# Consumed by notebooks/1_stats_transformer.ipynb via stats_transformer.Pipeline.
+data:
+  featurization:
+    date_column: date
+    column_mapping:
+      YEAR: date
+    transformations:
+      - log
+    data_columns:
+      - GNP
+      - POP
+
+model:
+  model_type: robust_ols
+  target_variable: TOTEMP
+  independent_variables:
+    - GNPDEFL
+    - GNP_log
+    - UNEMP
+    - ARMED
+    - POP_log
+  robust_ols:
+    cov_type: HC3
