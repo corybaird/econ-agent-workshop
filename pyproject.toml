@@ -10,6 +10,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
   "pydantic-ai-harness[coder]>=0.68.0",
+  "pydantic-ai-slim[openai]",
   "stats-transformer>=1.11.1",
   "auto-econ-sentiment>=1.0.2",
   "econ-pdf-extract>=0.1.0",

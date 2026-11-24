@@ -48,3 +48,20 @@ def test_synthetic_data_and_domain_tools_run_offline(tmp_path):
     assert pdf_res["status"] == "ok"
     assert len(pdf_res["claims"]) >= 2
     assert all(c["page"] == 2 for c in pdf_res["claims"])
+
+
+def test_resolve_model_supports_ollama_prefix_and_provider(monkeypatch):
+    from econ_agent_harness.agent import _resolve_model
+
+    monkeypatch.setenv("OLLAMA_API_KEY", "dummy-ollama-key")
+    m1 = _resolve_model(None, "ollama:glm-5.3-flash:cloud")
+    assert m1.model_name == "glm-5.3-flash:cloud"
+    assert str(m1.base_url).rstrip("/") == "https://ollama.com/v1"
+
+    m2 = _resolve_model("ollama-api-key", "beam")
+    assert m2.model_name == "beam"
+    assert str(m2.base_url).rstrip("/") == "https://ollama.com/v1"
+
+    monkeypatch.delenv("OLLAMA_API_KEY", raising=False)
+    with pytest.raises(ValueError, match="OLLAMA_API_KEY"):
+        _resolve_model(None, "ollama:glm-5.3-flash:cloud")
