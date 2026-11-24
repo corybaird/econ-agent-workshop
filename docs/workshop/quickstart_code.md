@@ -108,7 +108,14 @@ uv run python -m economic_libraries.verify_paper_claims.run
 
 ## 4. Section 3 Agent & Harness Scripts (`scripts/agent_tests/`)
 
-Run all offline harness smoke tests in one command (runs `agent_harness.sh` + harness `pytest` suite):
+| Script | Needs API Key / Token? | What It Runs |
+| --- | --- | --- |
+| `./scripts/run_all_harness.sh` | **No** (fully offline) | `agent_harness.sh` in `test` mode + harness `pytest` suite |
+| `./scripts/agent_tests/agent_harness.sh` | **No** for `test` mode; **Yes** for live LLM | Custom Pydantic-AI REPL (`ECON_AGENT_MODEL=test` by default) |
+| `./scripts/agent_tests/run_benchmark.sh` | **Yes** (`OLLAMA_API_KEY` + `pi` CLI) | Live prompts vs. skills vs. harness benchmark (`--no-langfuse` skips Langfuse) |
+| `./scripts/agent_tests/dorcheco.sh` | **Yes** (any 1 agent login or key) | Docker + Herdr sandbox with `claude`, `codex`, `pi`, and `agy` tabs |
+
+### Offline Harness Smoke Test (No API Key Required)
 
 ```bash
 ./scripts/run_all_harness.sh
@@ -116,22 +123,24 @@ Run all offline harness smoke tests in one command (runs `agent_harness.sh` + ha
 
 ### Custom Pydantic-AI Harness
 
-Defaults to `ECON_AGENT_MODEL=test` for an offline smoke run (set `ECON_AGENT_MODEL` to a live provider model for real runs):
+Defaults to `ECON_AGENT_MODEL=test` (Pydantic-AI offline test model — no API key needed). Pass a live provider model + API key for real runs:
 
 ```bash
+# Offline smoke run (no token required):
 ./scripts/agent_tests/agent_harness.sh
-# equivalent:
-ECON_AGENT_MODEL=test uv run python -m econ_agent_harness.agent
+
+# Live LLM run (example with Anthropic or OpenAI key set):
+ECON_AGENT_MODEL=anthropic:claude-sonnet-4-5 ./scripts/agent_tests/agent_harness.sh
 ```
 
-### Prompts vs. Skills vs. Harness Benchmark
+### Prompts vs. Skills vs. Harness Benchmark (Requires Live Model Key)
 
-Runs the configured benchmark in [`references/configs/benchmarks/bench_econ_tasks.yaml`](../../references/configs/benchmarks/bench_econ_tasks.yaml):
+Requires `OLLAMA_API_KEY` and the `pi` CLI (configured in [`references/configs/benchmarks/bench_econ_tasks.yaml`](../../references/configs/benchmarks/bench_econ_tasks.yaml)). Langfuse keys are optional if you pass `--no-langfuse`:
 
 ```bash
 ./scripts/agent_tests/run_benchmark.sh
 
-# Subset run without Langfuse telemetry:
+# Smaller subset without Langfuse telemetry:
 uv run python -m econ_agent_harness.benchmark.runner \
   --arms C0_bare C3_combined C4_custom_harness \
   --tasks t1_proxy_svar \
@@ -140,10 +149,16 @@ uv run python -m econ_agent_harness.benchmark.runner \
 
 ### Docker + Herdr Sandbox (`dorcheco`)
 
-Requires Docker Desktop running. Mounts this repo at `/workspace` and `data/raw/` read-only (`:ro`):
+Requires Docker Desktop running. Mounts only this repo at `/workspace`, keeps `data/raw/` read-only (`:ro`), and opens Herdr tabs for `claude`, `codex`, `pi`, and `agy`:
 
 ```bash
+# Normal launch (also accepts optional "up"):
+./scripts/agent_tests/dorcheco.sh
+
+# Clean reset + rebuild after Dockerfile or entrypoint changes:
+docker rm -f $(docker ps -aq --filter "name=dorcheco") 2>/dev/null || true
+docker compose -f .agents/dorcheco/docker-compose.yml build
 ./scripts/agent_tests/dorcheco.sh
 ```
 
-See [`.agents/dorcheco/README.md`](../../.agents/dorcheco/README.md) for container setup and API key configuration.
+See [`.agents/dorcheco/README.md`](../../.agents/dorcheco/README.md) for container setup, Herdr keybindings (`ctrl+b` then `n`/`p`/`v`/`c`/`q`), and API key configuration.
