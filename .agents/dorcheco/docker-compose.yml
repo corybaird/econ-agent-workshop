@@ -26,6 +26,7 @@ services:
       - dorcheco_claude:/home/agent/.claude
       - dorcheco_codex:/home/agent/.codex
       - dorcheco_pi:/home/agent/.pi
+      - dorcheco_gemini:/home/agent/.gemini
       - dorcheco_herdr:/home/agent/.config/herdr
       - dorcheco_uvcache:/home/agent/.cache/uv
 
@@ -35,5 +36,6 @@ volumes:
   dorcheco_claude:
   dorcheco_codex:
   dorcheco_pi:
+  dorcheco_gemini:
   dorcheco_herdr:
   dorcheco_uvcache:

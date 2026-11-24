@@ -40,11 +40,12 @@ RUN userdel -r ubuntu 2>/dev/null || true && \
 
 USER agent
 WORKDIR ${AGENT_HOME}
-RUN mkdir -p .config/gh .config/herdr .claude .codex .pi/agent .cache/uv
+RUN mkdir -p .config/gh .config/herdr .claude .codex .pi/agent .gemini .cache/uv
 
-# uv + Herdr multiplexer
+# uv + Herdr multiplexer + Antigravity CLI (agy)
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh && \
-    curl -fsSL https://herdr.dev/install.sh | sh
+    curl -fsSL https://herdr.dev/install.sh | sh && \
+    curl -fsSL https://antigravity.google/cli/install.sh | bash
 
 # Optional Langfuse plugin for Pi (stays off unless LANGFUSE_* keys are set in .env)
 RUN pi install npm:@langfuse/pi-observability-plugin
