@@ -21,7 +21,7 @@ We package two ways to steer an out-of-the-box coding agent under [`.agents/`](.
 - **Setup B — Combined lean system prompt (no separate skills):**
   - Single compact prompt: [`.agents/prompts/2_combined_econ_prompt.md`](../../.agents/prompts/2_combined_econ_prompt.md)
   - Matches modular skills on library accuracy while cutting token usage by up to 5.5x (fewer skill-loading turns)
-- **Benchmarking:** Compare all setups against a bare control using `./scripts/run_benchmark.sh` (`uv run python -m econ_agent_harness.benchmark.runner`), configured by [`references/configs/benchmarks/bench_econ_tasks.yaml`](../../references/configs/benchmarks/bench_econ_tasks.yaml).
+- **Benchmarking:** Compare all setups against a bare control using `./scripts/agent_tests/run_benchmark.sh` (`uv run python -m econ_agent_harness.benchmark.runner`), configured by [`references/configs/benchmarks/bench_econ_tasks.yaml`](../../references/configs/benchmarks/bench_econ_tasks.yaml).
 
 ## 2. Custom Harness (`econ-agent-harness`)
 
@@ -30,13 +30,13 @@ Built in [`src/econ_agent_harness/`](../../src/econ_agent_harness/) on top of Py
 - Enforces `data/raw/` read-only access and clean repository roots in Python (invalid paths are rejected before touching disk).
 - Exposes the Section 2 libraries as typed YAML-driven tools so the agent configures models without writing ad-hoc Python scripts.
 - Passes 4/4 fixed-tool benchmark tasks (Proxy-SVAR + sentiment/PDF extraction) with zero hand-written Python, while open-ended new pipeline stages still benefit from a sandboxed terminal.
-- Smoke-test locally via `./scripts/agent_harness.sh` (see [Quickstart Code](quickstart_code.md)).
+- Smoke-test locally via `./scripts/run_all_harness.sh` or `./scripts/agent_tests/agent_harness.sh` (see [Quickstart Code](quickstart_code.md)).
 
 ## 3. Multi-Agent Sandbox: Dorch (`dorcheco`) + Herdr
 
 When open-ended research coding needs a real terminal, enforce boundaries at the OS level:
 
-- Lean workshop sandbox in [`.agents/dorcheco/`](../../.agents/dorcheco/README.md): launch Docker + [Herdr](https://herdr.dev) in one command via `./scripts/dorcheco.sh` (no `~/.zshrc` edits; isolated from any existing `dorch` install).
+- Lean workshop sandbox in [`.agents/dorcheco/`](../../.agents/dorcheco/README.md): launch Docker + [Herdr](https://herdr.dev) in one command via `./scripts/agent_tests/dorcheco.sh` (no `~/.zshrc` edits; isolated from any existing `dorch` install).
   - Mounts only this repo at `/workspace` (host files hidden) and mounts `data/raw/` read-only (`:ro`).
   - Mixes Claude Code, Codex, Antigravity, Pi (cloud or local), and `econ-agent-harness` side by side in isolated git worktrees.
   - Separates `ORCHESTRATOR.md` (strongest model plans briefs), `WORKER.md` (small flash models edit approved files and run tests), and `REVIEWER.md` (independent model audits `git diff` and reruns code) under [`.agents/dorcheco/roles/`](../../.agents/dorcheco/roles/).

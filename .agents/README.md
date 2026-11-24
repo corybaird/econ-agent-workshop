@@ -14,7 +14,7 @@ All agent instructions and modular library skills live under `.agents/` to keep 
 - **Combined Lean System Prompt (Section 1 + Section 2, no separate skills):** [prompts/2_combined_econ_prompt.md](prompts/2_combined_econ_prompt.md)
   - Merges the folder/version-control rules with exact imports, minimal contracts for all four libraries, and a compact `reproducible-econ` YAML template to avoid multi-skill token bloat.
 - **Lean Docker + Herdr Sandbox (Section 3):** [dorcheco/README.md](dorcheco/README.md)
-  - Self-contained Docker Compose + Herdr setup (`./scripts/dorcheco.sh`) mounting `data/raw/` read-only with tabs for `claude`, `codex`, `pi`, and `econ-agent-harness`.
+  - Self-contained Docker Compose + Herdr setup (`./scripts/agent_tests/dorcheco.sh`) mounting `data/raw/` read-only with tabs for `claude`, `codex`, `pi`, and `econ-agent-harness`.
 
 ## Static Context Size Comparison
 
@@ -54,7 +54,7 @@ Compare all five arms (`C0_bare`, `C1_prompt_only`, `C2_prompt_skills`, `C3_comb
 
 ```bash
 # Full configured benchmark
-./scripts/run_benchmark.sh
+./scripts/agent_tests/run_benchmark.sh
 
 # Or run a subset locally without Langfuse
 uv run python -m econ_agent_harness.benchmark.runner --arms C0_bare C3_combined C4_custom_harness --tasks t1_proxy_svar --no-langfuse

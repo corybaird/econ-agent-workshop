@@ -11,7 +11,7 @@ You need **macOS or Linux**, plus:
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) — machine isolation and read-only sandboxes for Section 3 agent exercises
 - [zsh](https://www.zsh.org) — already installed on macOS
 
-The Section 2 library scripts and Jupyter notebooks need only `git` and `uv` (`uv sync` installs Python 3.12, all four libraries, and Jupyter). The coding agents install inside the `dorcheco` container (`./scripts/dorcheco.sh`).
+The Section 2 library scripts and Jupyter notebooks need only `git` and `uv` (`uv sync` installs Python 3.12, all four libraries, and Jupyter). The coding agents install inside the `dorcheco` container (`./scripts/agent_tests/dorcheco.sh`).
 
 ### Quick Setup Check
 

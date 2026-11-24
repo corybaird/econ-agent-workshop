@@ -29,7 +29,7 @@ cp .agents/dorcheco/.env.example .agents/dorcheco/.env
 2. Build and launch Docker + Herdr (opens labeled tabs for `claude`, `codex`, `pi`, and `econ-harness`):
 
 ```bash
-./scripts/dorcheco.sh
+./scripts/agent_tests/dorcheco.sh
 ```
 
 3. Inside the container, try Workshop Task 1 ([demo/BRIEF_task1_config.md](demo/BRIEF_task1_config.md)) from your Orchestrator tab:

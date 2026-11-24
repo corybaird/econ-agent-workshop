@@ -61,7 +61,7 @@ Start here, in order:
 .agents/
 ├── prompts/                # Section 1 default prompt + lean combined prompt
 ├── skills/                 # one SKILL.md per Section 2 library
-└── dorcheco/               # lean Docker + Herdr sandbox (./scripts/dorcheco.sh)
+└── dorcheco/               # lean Docker + Herdr sandbox (./scripts/agent_tests/dorcheco.sh)
 src/
 ├── econ_agent_harness/     # setup, pipeline, verify, agent, benchmark
 └── economic_libraries/     # one folder per tool, plus verify_paper_claims

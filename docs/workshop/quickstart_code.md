@@ -35,7 +35,13 @@ See [notebooks/README.md](../../notebooks/README.md) for the list of all four li
 
 ## 3. Section 2 Library Scripts (`scripts/economic_libraries/`)
 
-Each shell wrapper runs its underlying `uv run python -m ...` modules in sequence.
+Run all five library workflows in one command:
+
+```bash
+./scripts/run_all_econ.sh
+```
+
+Or run each library script (or its underlying `uv run python -m ...` modules) individually:
 
 ### `stats-transformer` (Panel OLS, VAR, Country Panel)
 
@@ -100,14 +106,20 @@ Downloads NBER WP 19260 (SHA-256 verified), extracts claims with `econ-pdf-extra
 uv run python -m economic_libraries.verify_paper_claims.run
 ```
 
-## 4. Section 3 Agent & Harness Scripts (`scripts/`)
+## 4. Section 3 Agent & Harness Scripts (`scripts/agent_tests/`)
+
+Run all offline harness smoke tests in one command (runs `agent_harness.sh` + harness `pytest` suite):
+
+```bash
+./scripts/run_all_harness.sh
+```
 
 ### Custom Pydantic-AI Harness
 
 Defaults to `ECON_AGENT_MODEL=test` for an offline smoke run (set `ECON_AGENT_MODEL` to a live provider model for real runs):
 
 ```bash
-./scripts/agent_harness.sh
+./scripts/agent_tests/agent_harness.sh
 # equivalent:
 ECON_AGENT_MODEL=test uv run python -m econ_agent_harness.agent
 ```
@@ -117,7 +129,7 @@ ECON_AGENT_MODEL=test uv run python -m econ_agent_harness.agent
 Runs the configured benchmark in [`references/configs/benchmarks/bench_econ_tasks.yaml`](../../references/configs/benchmarks/bench_econ_tasks.yaml):
 
 ```bash
-./scripts/run_benchmark.sh
+./scripts/agent_tests/run_benchmark.sh
 
 # Subset run without Langfuse telemetry:
 uv run python -m econ_agent_harness.benchmark.runner \
@@ -131,7 +143,7 @@ uv run python -m econ_agent_harness.benchmark.runner \
 Requires Docker Desktop running. Mounts this repo at `/workspace` and `data/raw/` read-only (`:ro`):
 
 ```bash
-./scripts/dorcheco.sh
+./scripts/agent_tests/dorcheco.sh
 ```
 
 See [`.agents/dorcheco/README.md`](../../.agents/dorcheco/README.md) for container setup and API key configuration.
