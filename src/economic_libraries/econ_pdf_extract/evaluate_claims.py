@@ -34,12 +34,14 @@ class EvaluateClaims:
         result = ExtractionPipeline(paper.source_path, paper=paper).run()
         logger.info("Extracted %d claims from %s", len(result.claims), paper.source_path)
 
+        out_dir = PROJECT_ROOT / f"data/final/pdf_extract/eval_claims_{datetime.now():%Y%m%d_%H%M%S}"
+        out_dir.mkdir(parents=True, exist_ok=True)
         evaluator = ClaimEvaluator(
             refs_dir=PROJECT_ROOT / eval_cfg["refs_dir"],
             papers=[paper],
             seq_threshold=eval_cfg["seq_threshold"],
             f1_threshold=eval_cfg["f1_threshold"],
-            output_dir=PROJECT_ROOT / f"data/final/eval_claims_{datetime.now():%Y%m%d_%H%M%S}",
+            output_dir=out_dir,
         )
         summary = evaluator.run()
         agg = summary["aggregate"]

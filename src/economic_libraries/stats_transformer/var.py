@@ -27,7 +27,9 @@ class MacroVAR:
         summary = str(model.get_summary())
         logger.info("\n%s", summary)
 
-        out_path = PROJECT_ROOT / f"data/final/macro_var_summary_{datetime.now():%Y%m%d_%H%M%S}.txt"
+        out_dir = PROJECT_ROOT / "data/final/econometrics"
+        out_dir.mkdir(parents=True, exist_ok=True)
+        out_path = out_dir / f"macro_var_summary_{datetime.now():%Y%m%d_%H%M%S}.txt"
         out_path.write_text(summary)
         logger.info("Summary written to %s", out_path)
 

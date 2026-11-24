@@ -37,7 +37,9 @@ class ToneIndex:
         ts.columns = ["year", "mean_growth_tone"]
         logger.info("\n%s", ts.to_string(index=False))
 
-        out_path = PROJECT_ROOT / f"data/final/sentiment_timeseries_{datetime.now():%Y%m%d_%H%M%S}.csv"
+        out_dir = PROJECT_ROOT / "data/final/sentiment"
+        out_dir.mkdir(parents=True, exist_ok=True)
+        out_path = out_dir / f"sentiment_timeseries_{datetime.now():%Y%m%d_%H%M%S}.csv"
         ts.to_csv(out_path, index=False)
         logger.info("Time series written to %s", out_path)
 

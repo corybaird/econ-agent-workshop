@@ -39,7 +39,9 @@ class ScoreSentences:
             scored[["text", score_col, f"{dictionary}_words_positive_{agg}", f"{dictionary}_words_negative_{agg}"]].to_string(index=False),
         )
 
-        out_path = PROJECT_ROOT / f"data/final/sentiment_sentences_{datetime.now():%Y%m%d_%H%M%S}.csv"
+        out_dir = PROJECT_ROOT / "data/final/sentiment"
+        out_dir.mkdir(parents=True, exist_ok=True)
+        out_path = out_dir / f"sentiment_sentences_{datetime.now():%Y%m%d_%H%M%S}.csv"
         scored.to_csv(out_path, index=False)
         logger.info("Results written to %s", out_path)
 
