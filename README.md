@@ -18,13 +18,14 @@ Solutions to the "AI" "Verification" "Crisis":
 
 Start here, in order:
 
-- [0. Research Basics](docs/workshop/0_research_basics.md): Recommended software for workshop: uv, Git, Docker, Overleaf
-- [1. Macro Libraries Toolbox](docs/workshop/1_macro_libraries_toolbox.md) — Four libraries/tools for economists
-- [2. Agent Orchestration](docs/workshop/2_agent_orchestration.md) — From basics agents, to agent orchestration to domain specific harnesses
+- [0. Research Basics](docs/workshop/0_research_basics.md) — Recommended software for the workshop: uv, Git, Docker, Overleaf
+- [1. Software for Macro](docs/workshop/1_software_for_macro.md) — Four open-source libraries as infrastructure
+- [2. Agent Orchestration](docs/workshop/2_agent_orchestration.md) — From out-of-the-box agents to custom harnesses and Docker + Herdr
+- [Quickstart Code](docs/workshop/quickstart_code.md) — Runnable `uv` scripts and Jupyter kernel setup
 - [Notebooks](notebooks/README.md) — One runnable notebook per library
 - [Citations](docs/citations.md) — Full citations for every paper, dataset, and dictionary the examples use
 
-> In progress: more code to be uploaded before the presentation. Data sources and terms are in [data/LICENSES.md](data/LICENSES.md).
+> Data sources and terms are in [data/LICENSES.md](data/LICENSES.md).
 
 ## 1. Folders/docs as INFRASTRUCTURE
 
@@ -39,8 +40,8 @@ Start here, in order:
 
 - [stats-transformer](https://github.com/corybaird/stats-transformer) — config-driven data transforms and econometric estimation
 - [auto-econ-sentiment](https://github.com/corybaird/auto-econ-sentiment) — transparent dictionary/LLM scoring for economic text
-- econ-pdf-extract — structured extraction of claims, formulas, and sections from PDFs *(link coming)*
-- reproducible-econ — caching, provenance, and run manifests *(link coming)*
+- [econ-pdf-extract](https://github.com/corybaird/econ-pdf-extract) — structured extraction of claims, formulas, and sections from PDFs
+- [reproducible-econ](https://github.com/corybaird/reproducible-econ) — caching, provenance, and run manifests
 
 ## 3. Agent/harness as INFRASTRUCTURE
 

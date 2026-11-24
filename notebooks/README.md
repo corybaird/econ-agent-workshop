@@ -1,9 +1,20 @@
 # Notebooks
 
-One per library, adapted from the library repositories and committed with outputs. Run from the repo root:
+One per library, adapted from the library repositories and committed with outputs. `jupyter` (including `jupyterlab` and `ipykernel`) is locked in `pyproject.toml` and `uv.lock`.
+
+Run from the repo root using the locked `uv` environment:
 
 ```bash
-uv run --with jupyterlab --with matplotlib jupyter lab notebooks/
+uv sync
+uv run jupyter lab notebooks/
+```
+
+To select the locked `uv` kernel inside VS Code, Cursor, or an existing Jupyter server, register it once:
+
+```bash
+uv run python -m ipykernel install --user \
+  --name econ-agent-workshop \
+  --display-name "Python (econ-agent-workshop)"
 ```
 
 | Notebook | Library | Shows | Inputs |
