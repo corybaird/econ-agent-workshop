@@ -23,6 +23,12 @@ cp /etc/econ-agent/PROMPT.md "$HOME/.pi/agent/AGENTS.md"
 cp /etc/econ-agent/PROMPT.md "$HOME/.gemini/GEMINI.md"
 cp /etc/econ-agent/pi-models.json "$HOME/.pi/agent/models.json"
 
+# Herdr restores saved tabs as empty shells (agents never relaunch), so start from a fresh layout unless opted out
+if [ "${DORCHECO_KEEP_SESSION:-0}" != "1" ]; then
+  rm -f "$HOME/.config/herdr/session.json"
+  rm -rf "$HOME/.config/herdr/session-snapshots"
+fi
+
 # Open labeled Herdr tabs once the interactive TUI workspace initializes
 open_tabs() {
   local i=0
