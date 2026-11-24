@@ -19,7 +19,7 @@ uv run python -m ipykernel install --user \
 
 | Notebook | Library | Shows | Inputs |
 | --- | --- | --- | --- |
-| [1_stats_transformer.ipynb](1_stats_transformer.ipynb) | stats-transformer | OLS and robust OLS checked against statsmodels | statsmodels datasets |
+| [1_stats_transformer.ipynb](1_stats_transformer.ipynb) | stats-transformer | YAML-driven featurization, Robust OLS (checked vs. statsmodels), Panel FE, and VAR | statsmodels / packaged datasets |
 | [2_auto_econ_sentiment.ipynb](2_auto_econ_sentiment.ipynb) | auto-econ-sentiment | Six dictionaries on FOMC statements | committed |
 | [3_econ_pdf_extract.ipynb](3_econ_pdf_extract.ipynb) | econ-pdf-extract | Claims and equations with page provenance | synthetic PDF, Shapiro, Sudhof and Wilson ([FRBSF WP 2017-01](https://doi.org/10.24148/wp2017-01)) downloaded |
 | [4_reproducible_econ.ipynb](4_reproducible_econ.ipynb) | reproducible-econ | Cold run, cache hits, claim checks, manifest | synthetic |
