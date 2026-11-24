@@ -1,0 +1,19 @@
+# YAML-driven two-way fixed-effects Panel OLS on Grunfeld (1958).
+# Consumed by notebooks/1_stats_transformer.ipynb via stats_transformer.Pipeline.
+data:
+  featurization:
+    entity_column: country
+    date_column: date
+    column_mapping:
+      firm: country
+      year: date
+
+model:
+  model_type: panel_ols
+  target_variable: invest
+  independent_variables:
+    - value
+    - capital
+  panel_ols:
+    entity_effects: true
+    time_effects: true
