@@ -77,10 +77,9 @@ For an easy visual entry point without the terminal, start with [Zeron](https://
 # Launch Docker + Herdr:
 ./scripts/agent_tests/dorcheco.sh
 
-# Clean reset + rebuild after Dockerfile or entrypoint changes:
+# Clean reset + rebuild with host UID after Dockerfile or entrypoint changes:
 docker rm -f $(docker ps -aq --filter "name=dorcheco") 2>/dev/null || true
-docker compose -f .agents/dorcheco/docker-compose.yml build
-./scripts/agent_tests/dorcheco.sh
+./scripts/agent_tests/dorcheco.sh --build
 ```
 
 ## 4. Live Demo Task (Real Macro Proxy-SVAR)
