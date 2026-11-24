@@ -47,9 +47,11 @@ class CountryPanel:
         logger.info("\n%s", table)
 
         stamp = f"{datetime.now():%Y%m%d_%H%M%S}"
-        (PROJECT_ROOT / f"data/final/country_panel_summary_{stamp}.txt").write_text(summary)
-        table.to_csv(PROJECT_ROOT / f"data/final/country_panel_table_{stamp}.csv")
-        logger.info("Summary and table written to data/final/ with stamp %s", stamp)
+        out_dir = PROJECT_ROOT / "data/final/econometrics"
+        out_dir.mkdir(parents=True, exist_ok=True)
+        (out_dir / f"country_panel_summary_{stamp}.txt").write_text(summary)
+        table.to_csv(out_dir / f"country_panel_table_{stamp}.csv")
+        logger.info("Summary and table written to data/final/econometrics/ with stamp %s", stamp)
         return {"panel": panel, "table": table, "summary": summary}
 
     @staticmethod

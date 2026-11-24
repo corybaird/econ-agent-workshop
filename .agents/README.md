@@ -14,7 +14,7 @@ All agent instructions and modular library skills live under `.agents/` to keep 
 - **Combined Lean System Prompt (Section 1 + Section 2, no separate skills):** [prompts/2_combined_econ_prompt.md](prompts/2_combined_econ_prompt.md)
   - Merges the folder/version-control rules with exact imports, minimal contracts for all four libraries, and a compact `reproducible-econ` YAML template to avoid multi-skill token bloat.
 - **Lean Docker + Herdr Sandbox (Section 3):** [dorcheco/README.md](dorcheco/README.md)
-  - Self-contained Docker Compose + Herdr setup (`./scripts/agent_tests/dorcheco.sh`) mounting `data/raw/` read-only with tabs for `claude`, `codex`, `pi`, and `econ-agent-harness`.
+  - Self-contained Docker Compose + Herdr setup (`./scripts/agent_tests/dorcheco.sh`) mounting `data/raw/` read-only with tabs for `claude`, `codex`, `pi`, and `agy`.
 
 ## Static Context Size Comparison
 

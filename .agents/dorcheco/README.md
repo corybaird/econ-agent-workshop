@@ -8,11 +8,11 @@ Minimal Docker + [Herdr](https://herdr.dev) setup (`dorcheco`) for this workshop
   - Mounts only this repository at `/workspace` (the rest of your computer is invisible; no Docker socket)
   - Mounts `data/raw/` **read-only (`:ro`)** at the OS level
   - Stores isolated git worktrees in a dedicated Docker volume (`/workspace-worktrees`)
-- **Four harnesses pre-installed side by side inside Herdr:**
+- **Four coding agents pre-installed side by side inside Herdr:**
   - `claude` (Claude Code)
   - `codex` (OpenAI Codex CLI)
   - `pi` (Pi coding agent)
-  - `econ-harness` (this repo's walled Pydantic-AI `econ-agent-harness`)
+  - `agy` (Google Antigravity CLI)
 - **Three separated Herdr roles ([roles/](roles/)):**
   - `ORCHESTRATOR.md` (plans and dispatches briefs; no direct code edits)
   - `WORKER.md` (edits approved files in its own worktree; runs Section 2 libraries)
@@ -26,7 +26,7 @@ Minimal Docker + [Herdr](https://herdr.dev) setup (`dorcheco`) for this workshop
 cp .agents/dorcheco/.env.example .agents/dorcheco/.env
 ```
 
-2. Build and launch Docker + Herdr (opens labeled tabs for `claude`, `codex`, `pi`, and `econ-harness`):
+2. Build and launch Docker + Herdr (opens labeled tabs for `claude`, `codex`, `pi`, and `agy`):
 
 ```bash
 ./scripts/agent_tests/dorcheco.sh
@@ -42,7 +42,7 @@ Read /etc/herdr/roles/ORCHESTRATOR.md and dispatch .agents/dorcheco/demo/BRIEF_t
 
 | Keys | Action |
 | --- | --- |
-| `ctrl+b` then `n` / `p` | Next / previous tab (`claude`, `codex`, `pi`, `econ-harness`) |
+| `ctrl+b` then `n` / `p` | Next / previous tab (`claude`, `codex`, `pi`, `agy`) |
 | `ctrl+b` then `v` / `-` | Split pane vertically / horizontally |
 | `ctrl+b` then `c` | Open a new shell tab |
 | `ctrl+b` then `q` | Detach from Herdr |

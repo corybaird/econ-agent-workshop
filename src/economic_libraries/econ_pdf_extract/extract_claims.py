@@ -2,7 +2,7 @@
 
 The PDF is a 2-page synthetic working paper ("Example A. Author") shipped with
 econ-pdf-extract; the run logs every claim with its page/section provenance and
-writes a Markdown report to data/final/.
+writes a Markdown report to data/final/pdf_extract/.
 """
 
 import logging
@@ -37,7 +37,9 @@ class ExtractClaims:
             logger.info("STAT %s (%s) on page %d", stat.kind, stat.value, stat.page)
 
         report = MarkdownReportWriter().render(result)
-        out_path = PROJECT_ROOT / f"data/final/example_paper_report_{datetime.now():%Y%m%d_%H%M%S}.md"
+        out_dir = PROJECT_ROOT / "data/final/pdf_extract"
+        out_dir.mkdir(parents=True, exist_ok=True)
+        out_path = out_dir / f"example_paper_report_{datetime.now():%Y%m%d_%H%M%S}.md"
         out_path.write_text(report)
         logger.info("Markdown report written to %s", out_path)
 
