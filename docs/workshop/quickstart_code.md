@@ -123,14 +123,14 @@ uv run python -m economic_libraries.verify_paper_claims.run
 
 ### Custom Pydantic-AI Harness
 
-Defaults to `ECON_AGENT_MODEL=test` (Pydantic-AI offline test model — no API key needed). Pass a live provider model + API key for real runs:
+Auto-loads `.env` (copy from [`.env.example`](../../.env.example)) and defaults to `ECON_AGENT_MODEL=test` (offline smoke test — no API key needed). Set `OLLAMA_API_KEY` in `.env` and pass `ollama:glm-5.3-flash:cloud` (or any provider model) for live runs — see [`pydantic_harness_explainer.md`](../../src/econ_agent_harness/pydantic_harness_explainer.md):
 
 ```bash
 # Offline smoke run (no token required):
 ./scripts/agent_tests/agent_harness.sh
 
-# Live LLM run (example with Anthropic or OpenAI key set):
-ECON_AGENT_MODEL=anthropic:claude-sonnet-4-5 ./scripts/agent_tests/agent_harness.sh
+# Live LLM run via Ollama Cloud (reads OLLAMA_API_KEY from .env):
+ECON_AGENT_MODEL=ollama:glm-5.3-flash:cloud ./scripts/agent_tests/agent_harness.sh
 ```
 
 ### Prompts vs. Skills vs. Harness Benchmark (Requires Live Model Key)

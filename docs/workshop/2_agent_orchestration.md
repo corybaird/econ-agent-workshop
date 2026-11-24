@@ -45,22 +45,22 @@ uv run python -m econ_agent_harness.benchmark.runner \
 
 ## 2. Custom Harness (`econ-agent-harness`)
 
-Built in [`src/econ_agent_harness/`](../../src/econ_agent_harness/) on top of Pydantic-AI to turn folder rules and library calls into code-enforced boundaries:
+Built in [`src/econ_agent_harness/`](../../src/econ_agent_harness/) on top of Pydantic-AI to turn folder rules and library calls into code-enforced boundaries — see the architecture diagram and tool table in [`pydantic_harness_explainer.md`](../../src/econ_agent_harness/pydantic_harness_explainer.md):
 
 - Enforces `data/raw/` read-only access and clean repository roots in Python (invalid paths are rejected before touching disk).
 - Exposes the Section 2 libraries as typed YAML-driven tools so the agent configures models without writing ad-hoc Python scripts.
 - Passes 4/4 fixed-tool benchmark tasks (Proxy-SVAR + sentiment/PDF extraction) with zero hand-written Python, while open-ended new pipeline stages still benefit from a sandboxed terminal.
-- **No token required for offline smoke tests** (`ECON_AGENT_MODEL=test` uses Pydantic-AI's built-in test model); set `ECON_AGENT_MODEL` + your provider API key for live runs:
+- **No token required for offline smoke tests** (`ECON_AGENT_MODEL=test` uses Pydantic-AI's built-in test model); copy `.env.example` to `.env` and set `OLLAMA_API_KEY` + `ECON_AGENT_MODEL=ollama:glm-5.3-flash:cloud` (or another provider key) for live runs:
 
 ```bash
 # Offline smoke test + harness unit tests (no API key needed):
 ./scripts/run_all_harness.sh
 
-# Interactive REPL (offline test model by default):
+# Interactive REPL (auto-loads .env; defaults to offline test model):
 ./scripts/agent_tests/agent_harness.sh
 
-# Live LLM run (requires matching provider API key):
-ECON_AGENT_MODEL=anthropic:claude-sonnet-4-5 ./scripts/agent_tests/agent_harness.sh
+# Live LLM run via Ollama Cloud (reads OLLAMA_API_KEY from .env):
+ECON_AGENT_MODEL=ollama:glm-5.3-flash:cloud ./scripts/agent_tests/agent_harness.sh
 ```
 
 ## 3. Multi-Agent Sandbox: Dorch (`dorcheco`) + Herdr
